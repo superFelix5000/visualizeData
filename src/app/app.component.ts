@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'visualizeData';
+  title = 'mein erstes chart';
+
+  config : zingchart.graphset = {
+    type: 'line', 
+      series: [{ values: [3,4,5,5,6,7,5,3] }] 
+  };
 }
