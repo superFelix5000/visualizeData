@@ -11,12 +11,17 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedYear = '2017';
+  filesToLoad: string[] = ['one.txt', 'two.txt', 'three.txt', 'four.txt'];
+  selectedYear: string = '2017';
   series: zingchart.series = null;
   bankdataEntries: BankDataEntry[] = [];
   
   constructor(private ngxCsvParser: NgxCsvParser, private http: HttpClient) {
-    this.http.get('assets/one.txt', { responseType: 'text'})
+    this.filesToLoad.forEach(file => this.loadDataFromFile(file));
+  }
+
+  private loadDataFromFile(file: string) {
+    this.http.get('assets/' + file, { responseType: 'text'})
       .subscribe(data => {
         const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
         entries
@@ -38,7 +43,7 @@ export class AppComponent {
               entry[12]
             ));
           });
-      this.updateCharts();// 17.08.2017
+      this.updateCharts();
     });
   }
   
