@@ -10,7 +10,7 @@ import { HttpClient} from "@angular/common/http"
 export class AppComponent {
 
   constructor(private ngxCsvParser: NgxCsvParser, private http: HttpClient) {
-    this.http.get('data/one.txt', { responseType: 'text'})
+    this.http.get('assets/one.txt', { responseType: 'text'})
     .subscribe(data => {
       console.log(data);
     });

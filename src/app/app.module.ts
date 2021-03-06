@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
@@ -14,7 +15,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule,
     ZingchartAngularModule,
-    NgxCsvParserModule
+    NgxCsvParserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
