@@ -1,10 +1,10 @@
-<mat-form-field appearance="fill">
-    <mat-label>Select an option</mat-label>
-    <mat-select [(value)]="selected">
+<mat-form-field>
+    <mat-label>Select a year</mat-label>
+    <mat-select [(value)]="selectedYear" (selectionChange)="onYearSelectionChange($event)">
         <mat-option>None</mat-option>
-        <mat-option value="option1">Option 1</mat-option>
-        <mat-option value="option2">Option 2</mat-option>
-        <mat-option value="option3">Option 3</mat-option>
+        <mat-option value="2017">2017</mat-option>
+        <mat-option value="2018">2018</mat-option>
+        <mat-option value="2019">2019</mat-option>
     </mat-select>
 </mat-form-field>
 <div> <zingchart-angular [config]="config" [series]="series" [height]="500"></zingchart-angular> </div>

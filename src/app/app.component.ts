@@ -3,6 +3,7 @@ import { NgxCsvParser } from 'ngx-csv-parser';
 import { HttpClient} from "@angular/common/http";
 import { BankDataEntry } from './bank-data-entry';
 import { FelixDate } from "./felix-date";
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { FelixDate } from "./felix-date";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selected = 'option2';
+  selectedYear = '2017';
   series: zingchart.series = null;
   bankdataEntries: BankDataEntry[] = [];
   
@@ -37,15 +38,21 @@ export class AppComponent {
               entry[12]
             ));
           });
-      this.updateCharts();
+      this.updateCharts();// 17.08.2017
     });
   }
-  // 17.08.2017
+  
+  onYearSelectionChange(ev: MatSelectChange) {
+    console.log(ev.value);
+    this.selectedYear = ev.value;
+    this.updateCharts();
+  }
+
   private convertStringToDate(stringDate: string): FelixDate {
     const day = parseInt(stringDate.substring(0, 2));
     const month = parseInt(stringDate.substring(3, 5));
     const year = parseInt(stringDate.substring(6, 10));
-    return new FelixDate(year, month, day);
+    return new FelixDate(day, month, year);
   }
 
   title = 'mein erstes chart';
@@ -70,6 +77,7 @@ export class AppComponent {
     let returnArray: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
     for(var i = 0; i < 12; i++) {
       returnArray[i] = (this.bankdataEntries
+        .filter(entry => entry.paymentDate.year === parseInt(this.selectedYear))
         .filter(entry => entry.paymentDate.month === i + 1)
         .map(entry => entry.amount)
         .reduce((a,b) => a + b, 0));  
