@@ -1,5 +1,3 @@
-Tilinumero	FI5210123500354731
-
 Kirjauspäivä	Arvopäivä	Maksupäivä	Määrä	Saaja/Maksaja	Tilinumero	BIC	Tapahtuma	Viite	Maksajan viite	Viesti	Kortinnumero	Kuitti	
 
 18.04.2017	14.04.2017	14.04.2017	-140,00				ATMotto/Otto.			05904 SATAMATIE 26 OULU 	4920109019657053		
