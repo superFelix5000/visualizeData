@@ -1,31 +1,33 @@
+import { FelixDate } from "./felix-date";
+
 export class BankDataEntry {
-    postingDate: Date;
-    valueDate: Date;
-    paymentDate: Date;
-    amount: Number;
+    postingDate: FelixDate;
+    valueDate: FelixDate;
+    paymentDate: FelixDate;
+    amount: number;
     recipientOrPayer: string;
-    accountNumber: Number;
-    bic: Number;
+    accountNumber: number;
+    bic: number;
     event: string;
     reference: string;
     payerReference: string;
     message: string;
-    cardNumber: Number;
+    cardNumber: number;
     receipt: string;
 
     constructor(
-        postingDate: Date,
-        valueDate: Date,
-        paymentDate: Date,
-        amount: Number,
+        postingDate: FelixDate,
+        valueDate: FelixDate,
+        paymentDate: FelixDate,
+        amount: number,
         recipientOrPayer: string,
-        accountNumber: Number,
-        bic: Number,
+        accountNumber: number,
+        bic: number,
         event: string,
         reference: string,
         payerReference: string,
         message: string,
-        cardNumber: Number,
+        cardNumber: number,
         receipt: string ){
             this.postingDate = postingDate;
             this.valueDate = valueDate;
