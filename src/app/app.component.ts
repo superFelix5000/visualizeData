@@ -45,9 +45,7 @@ export class AppComponent {
     const day = parseInt(stringDate.substring(0, 2));
     const month = parseInt(stringDate.substring(3, 5));
     const year = parseInt(stringDate.substring(6, 10));
-    const returnDate = new FelixDate(year, month, day);
-    console.log(month);
-    return returnDate;
+    return new FelixDate(year, month, day);
   }
 
   title = 'mein erstes chart';
@@ -55,13 +53,12 @@ export class AppComponent {
   config : zingchart.graphset = {
     title: {text: 'jee'},
     type: 'bar', 
-    series: [{ values: [3.5,4,5,5,6,7,5,3,1,2,3] }],
     "scale-x": {
         // Set scale label
         label: { text: 'Months' },
         // Convert text on scale indices
         
-        values: [ 'January', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'October', 'November', 'December']
+        values: [ 'January', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   };
 
@@ -70,10 +67,10 @@ export class AppComponent {
   }
 
   private getMonthValues(): number[] {
-    const returnArray: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
-    for(var i = 1; i < 13; i++) {
-      returnArray[i - 1] = (this.bankdataEntries
-        .filter(entry => entry.paymentDate.month === i)
+    let returnArray: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
+    for(var i = 0; i < 12; i++) {
+      returnArray[i] = (this.bankdataEntries
+        .filter(entry => entry.paymentDate.month === i + 1)
         .map(entry => entry.amount)
         .reduce((a,b) => a + b, 0));  
     }
