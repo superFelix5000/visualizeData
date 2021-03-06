@@ -10,33 +10,33 @@ import { FelixDate } from "./felix-date";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
+  selected = 'option2';
   series: zingchart.series = null;
   bankdataEntries: BankDataEntry[] = [];
   
   constructor(private ngxCsvParser: NgxCsvParser, private http: HttpClient) {
     this.http.get('assets/one.txt', { responseType: 'text'})
-    .subscribe(data => {
-      const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
-      entries
-        .filter(entry => entry.length > 1)
-        .forEach(entry => {
-          this.bankdataEntries.push(new BankDataEntry(
-            this.convertStringToDate(entry[0]),
-            this.convertStringToDate(entry[1]),
-            this.convertStringToDate(entry[2]),
-            parseFloat(entry[3].replace(',', '.')),
-            entry[4],
-            entry[5],
-            entry[6],
-            entry[7],
-            entry[8],
-            entry[9],
-            entry[10],
-            entry[11],
-            entry[12]
-          ));
-        });
+      .subscribe(data => {
+        const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
+        entries
+          .filter(entry => entry.length > 1)
+          .forEach(entry => {
+            this.bankdataEntries.push(new BankDataEntry(
+              this.convertStringToDate(entry[0]),
+              this.convertStringToDate(entry[1]),
+              this.convertStringToDate(entry[2]),
+              parseFloat(entry[3].replace(',', '.')),
+              entry[4],
+              entry[5],
+              entry[6],
+              entry[7],
+              entry[8],
+              entry[9],
+              entry[10],
+              entry[11],
+              entry[12]
+            ));
+          });
       this.updateCharts();
     });
   }
