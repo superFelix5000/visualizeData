@@ -5,6 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## TODO:
 - investigate for store solution to use ngrx or sth else
 - make separate components for things
+- make the year balance thingys buttons?
 - always keep dependencies up to date, use newest versions of stuff
 
 ## Development server
