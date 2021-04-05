@@ -11,12 +11,30 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedYear: string = '2017';
+  years:string[] = [
+    '2017',
+    '2018',
+    '2019',
+    '2020',
+    '2021'
+  ];  
+  selectedYear: string = this.years[0];
+  yearBalances = new Map<string, number>();
   series: zingchart.series = null;
   bankdataEntries: BankDataEntry[] = [];
 
   constructor(private ngxCsvParser: NgxCsvParser, private http: HttpClient) {
     this.reloadData();
+    // TODO: don't use setTimeOut
+    setTimeout(() => this.initMapBalances(), 1000);
+  }
+
+  initMapBalances() {
+    this.years.forEach(year => {
+      let monthValues = this.getMonthValues(year);
+      let sum = monthValues.reduce((a,b) => a + b, 0);
+      this.yearBalances.set(year, this.getMonthValues(year).reduce((a,b) => a + b, 0))
+    });
   }
 
   reloadData() {
@@ -74,14 +92,14 @@ export class AppComponent {
   };
 
   private updateCharts() {
-    this.series = [{values: this.getMonthValues()}];
+    this.series = [{values: this.getMonthValues(this.selectedYear)}];
   }
 
-  private getMonthValues(): number[] {
+  private getMonthValues(selectedYear: string): number[] {
     let returnArray: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
     for(var i = 0; i < 12; i++) {
       returnArray[i] = (this.bankdataEntries
-        .filter(entry => entry.paymentDate.year === parseInt(this.selectedYear))
+        .filter(entry => entry.paymentDate.year === parseInt(selectedYear))
         .filter(entry => entry.paymentDate.month === i + 1)
         .map(entry => entry.amount)
         .reduce((a,b) => a + b, 0));  
