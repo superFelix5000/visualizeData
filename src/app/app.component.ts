@@ -17,9 +17,9 @@ export class AppComponent {
     '2019',
     '2020',
     '2021'
-  ];  
-  selectedYear: string = this.years[0];
-  yearBalances = new Map<string, number>();
+  ];
+  selectedYear: string = this.years[this.years.length - 1];
+  yearBalances = [];
   series: zingchart.series = null;
   bankdataEntries: BankDataEntry[] = [];
 
@@ -33,7 +33,7 @@ export class AppComponent {
     this.years.forEach(year => {
       let monthValues = this.getMonthValues(year);
       let sum = monthValues.reduce((a,b) => a + b, 0);
-      this.yearBalances.set(year, this.getMonthValues(year).reduce((a,b) => a + b, 0))
+      this.yearBalances.push(this.getMonthValues(year).reduce((a,b) => a + b, 0));
     });
   }
 

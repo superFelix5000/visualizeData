@@ -1,3 +1,12 @@
+.yearBalance {
+    display: flex;
+    flex-direction: row;
+
+    h4 {
+        margin-left: 15px;
+    }
+}
+
 .positive {
     color: green;
 }

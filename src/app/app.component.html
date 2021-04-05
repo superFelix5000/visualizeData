@@ -1,6 +1,11 @@
+<button mat-raised-button (click)="reloadData()">Reload</button>
 <h2>Year balances</h2>
-<div *ngFor="let year of years">
-    <h3>{{year}} : {{yearBalances.get(year) | number}}</h3>
+<div class="yearBalance" *ngFor="let yearBalance of yearBalances, let i = index" >
+    <h3>{{years[i]}} :</h3> 
+    <h4 [class.positive]="yearBalance > 0"
+        [class.negative]="yearBalance < 0">
+        {{yearBalance | number}}
+    </h4>
 </div>
 <mat-form-field>
     <mat-label>Select a year</mat-label>
@@ -13,5 +18,4 @@
         <mat-option value="2021">2021</mat-option>
     </mat-select>
 </mat-form-field>
-<button mat-raised-button (click)="reloadData()">Reload</button>
 <div> <zingchart-angular [config]="config" [series]="series" [height]="500"></zingchart-angular> </div>
