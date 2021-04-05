@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinanceDataService } from './financeDataService';
 
@@ -23,7 +24,8 @@ import { FinanceDataService } from './financeDataService';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [FinanceDataService],
   bootstrap: [AppComponent]

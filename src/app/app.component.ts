@@ -11,21 +11,25 @@ import { MatSelectChange } from '@angular/material/select';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  filesToLoad: string[] = ['one.txt', 'two.txt', 'three.txt', 'four.txt'];
   selectedYear: string = '2017';
   series: zingchart.series = null;
   bankdataEntries: BankDataEntry[] = [];
-  
+
   constructor(private ngxCsvParser: NgxCsvParser, private http: HttpClient) {
-    this.filesToLoad.forEach(file => this.loadDataFromFile(file));
+    this.reloadData();
+  }
+
+  reloadData() {
+    this.loadDataFromFile('all.txt');
   }
 
   private loadDataFromFile(file: string) {
+    this.bankdataEntries = [];
     this.http.get('assets/' + file, { responseType: 'text'})
       .subscribe(data => {
         const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
         entries
-          .filter(entry => entry.length > 1)
+          .filter(entry => entry.length > 3)
           .forEach(entry => {
             this.bankdataEntries.push(new BankDataEntry(
               this.convertStringToDate(entry[0]),
@@ -60,16 +64,11 @@ export class AppComponent {
     return new FelixDate(day, month, year);
   }
 
-  title = 'mein erstes chart';
-
   config : zingchart.graphset = {
     title: {text: 'jee'},
     type: 'bar', 
     "scale-x": {
-        // Set scale label
-        label: { text: 'Months' },
-        // Convert text on scale indices
-        
+        label: { text: 'Months' },       
         values: [ 'January', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   };
