@@ -10,6 +10,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinanceDataService } from './shared/financeDataService';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { FinanceDataService } from './shared/financeDataService';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   providers: [FinanceDataService],
   bootstrap: [AppComponent]
