@@ -1,6 +1,6 @@
 <button mat-raised-button (click)="reloadData()">Reload</button>
 <h2>Year balances</h2>
-<div class="yearBalances">
+<div class="yearBalances" *ngIf="yearBalances.length > 0">
     <div class="yearBalance" *ngFor="let yearBalance of yearBalances, let i = index" >
         <h3>{{years[i]}} :</h3> 
         <h4 [class.positive]="yearBalance > 0"

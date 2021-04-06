@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FinanceDataService } from './financeDataService';
+import { FinanceDataService } from './shared/financeDataService';
 
 @NgModule({
   declarations: [
