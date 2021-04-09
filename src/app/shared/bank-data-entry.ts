@@ -1,6 +1,8 @@
 import { SimpleDate } from "./simple-date";
+import { guid } from '@datorama/akita';
 
 export class BankDataEntry {
+    id: string;
     postingDate: SimpleDate;
     valueDate: SimpleDate;
     paymentDate: SimpleDate;
@@ -29,6 +31,7 @@ export class BankDataEntry {
         message: string,
         cardNumber: number,
         receipt: string ){
+            this.id = guid();
             this.postingDate = postingDate;
             this.valueDate = valueDate;
             this.paymentDate = paymentDate;

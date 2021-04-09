@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
+import { Observable } from 'rxjs';
 import { YEARS } from './shared/constants';
-import { FinanceDataService } from './shared/financeDataService';
+import { BankDataQuery } from './state/bank.data.query';
+import { BankDataService } from './state/bank.data.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +12,18 @@ import { FinanceDataService } from './shared/financeDataService';
 })
 export class AppComponent {
   years = YEARS;
-  selectedYear: string = YEARS[YEARS.length - 1];
-  yearBalances: number[] = [];
+  selectedYear: Observable<number>;
+  yearBalances: Observable<number[]>;
   series: zingchart.series = null;
 
-  constructor(private financeDataService: FinanceDataService) {
-    setTimeout(() => this.updateCharts(), 2000);
+  constructor(private bankDataQuery: BankDataQuery,
+              private bankDataService: BankDataService) {
+    this.selectedYear = bankDataQuery.selectCurrentYear$;
+    this.yearBalances = bankDataQuery.selectCurrentMonthValues$;
   }
   
   onYearSelectionChange(ev: MatSelectChange) {
-    console.log(ev.value);
-    this.selectedYear = ev.value;
-    this.updateCharts();
+    this.bankDataService.setYear(parseInt(ev.value));
   }
 
   config : zingchart.graphset = {
@@ -33,12 +35,7 @@ export class AppComponent {
     }
   };
 
-  private updateCharts() {
-    this.series = [{values: this.financeDataService.getMonthValues(this.selectedYear)}];
-    this.yearBalances = this.financeDataService.getYearBalances();
-  }
-
   reloadData() {
-    this.financeDataService.reloadData();
+    this.bankDataService.reloadData();
   }
 }

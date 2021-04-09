@@ -17,7 +17,7 @@ export class FinanceDataService {
   }
 
   init() {
-    this.initYearBalances();
+    // this.initYearBalances();
   }
 
   reloadData() {
@@ -55,14 +55,14 @@ export class FinanceDataService {
           this.init();
     });
   }
-
+/*
   private initYearBalances() {
     this.yearBalances = [];
     YEARS.forEach(year => {
       this.yearBalances.push(this.getMonthValues(year).reduce((a,b) => a + b, 0));
     });
   }
-
+*/
   private convertStringToDate(stringDate: string): SimpleDate {
     const day = parseInt(stringDate.substring(0, 2));
     const month = parseInt(stringDate.substring(3, 5));

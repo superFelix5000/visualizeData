@@ -1,4 +1,5 @@
 <button mat-raised-button (click)="reloadData()">Reload</button>
+<!--
 <h2>Year balances</h2>
 <div class="yearBalances" *ngIf="yearBalances.length > 0">
     <div class="yearBalance" *ngFor="let yearBalance of yearBalances, let i = index" >
@@ -9,6 +10,7 @@
         </h4>
     </div>
 </div>
+-->
 <mat-form-field>
     <mat-label>Select a year</mat-label>
     <mat-select [(value)]="selectedYear" (selectionChange)="onYearSelectionChange($event)">
