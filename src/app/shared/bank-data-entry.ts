@@ -1,9 +1,9 @@
-import { FelixDate } from "./felix-date";
+import { SimpleDate } from "./simple-date";
 
 export class BankDataEntry {
-    postingDate: FelixDate;
-    valueDate: FelixDate;
-    paymentDate: FelixDate;
+    postingDate: SimpleDate;
+    valueDate: SimpleDate;
+    paymentDate: SimpleDate;
     amount: number;
     recipientOrPayer: string;
     accountNumber: number;
@@ -16,9 +16,9 @@ export class BankDataEntry {
     receipt: string;
 
     constructor(
-        postingDate: FelixDate,
-        valueDate: FelixDate,
-        paymentDate: FelixDate,
+        postingDate: SimpleDate,
+        valueDate: SimpleDate,
+        paymentDate: SimpleDate,
         amount: number,
         recipientOrPayer: string,
         accountNumber: number,

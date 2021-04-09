@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BankDataEntry } from "./bank-data-entry";
-import { FelixDate } from "./felix-date";
+import { SimpleDate } from "./simple-date";
 import { NgxCsvParser } from 'ngx-csv-parser';
 import { HttpClient } from "@angular/common/http";
 import { YEARS } from "./constants";
@@ -63,11 +63,11 @@ export class FinanceDataService {
     });
   }
 
-  private convertStringToDate(stringDate: string): FelixDate {
+  private convertStringToDate(stringDate: string): SimpleDate {
     const day = parseInt(stringDate.substring(0, 2));
     const month = parseInt(stringDate.substring(3, 5));
     const year = parseInt(stringDate.substring(6, 10));
-    return new FelixDate(day, month, year);
+    return new SimpleDate(day, month, year);
   }
 
   getMonthValues(selectedYear: string): number[] {
