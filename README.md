@@ -3,14 +3,19 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
 ## TODO:
-- investigate for store solution to use ngrx or sth else
+- implement basic store functionality using Akita
+    - selected year
+    - entries from cvs as entities?
+- service also handles saving to browser (for categories)
+- add tabs to main page --> main, categories, category assignment
 - make separate components for things
 - make the year balance thingys buttons?
 - save data to browser
 - make categories dynamic on other tab
-- make all entries taggable with categories
+- make all entries taggable with extra words?
 - show categories in cake diagram per year/month/overall
-- always keep dependencies up to date, use newest versions of stuff
+- use newest typescript?
+- on click() on months show the month-specific data?
 
 ## Development server
 
