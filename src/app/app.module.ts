@@ -7,17 +7,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button'
+import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { VisualizationComponent } from './visualization-page/visualization/visualization.component';
 import { AppRoutingModule } from './routing/routing.module';
-import { BankDataService } from './state/bank.data.service';
+import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VisualizationComponent
+    VisualizationComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { BankDataService } from './state/bank.data.service';
     ReactiveFormsModule,
     MatSelectModule,
     MatButtonModule,
+    MatTabsModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   bootstrap: [AppComponent]
