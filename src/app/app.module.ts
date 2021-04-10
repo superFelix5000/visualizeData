@@ -8,11 +8,11 @@ import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FinanceDataService } from './shared/financeDataService';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
 import { VisualizationComponent } from './visualization-page/visualization/visualization.component';
 import { AppRoutingModule } from './routing/routing.module';
+import { BankDataService } from './state/bank.data.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,6 @@ import { AppRoutingModule } from './routing/routing.module';
     MatButtonModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
-  providers: [FinanceDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

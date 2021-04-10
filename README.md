@@ -3,8 +3,6 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
 ## TODO:
-- remove deprecated usage of stuff
-- add functionality for year balances through store
 - do I have to subscribe or can I do it better?
 - service also handles saving to browser (for categories)
 - add tabs to main page --> main, categories, category assignment
