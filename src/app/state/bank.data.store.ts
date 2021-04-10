@@ -4,12 +4,10 @@ import { Injectable } from '@angular/core';
 import { YEARS } from "../shared/constants";
 
 export interface BankDataState extends EntityState<BankDataEntry> {
-    //yearBalances: number[];
     selectedYear: number
 }
   
 const initialState: BankDataState = {
-    //yearBalances: []
     selectedYear: YEARS[YEARS.length - 1]
 };
 

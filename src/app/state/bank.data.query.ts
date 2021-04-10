@@ -1,9 +1,10 @@
 import { QueryEntity } from "@datorama/akita";
-import { combineLatest, Observable } from "rxjs";
+import { combineLatest, Observable, of } from "rxjs";
 import { BankDataState, BankDataStore } from "./bank.data.store";
-import { filter } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import { BankDataEntry } from "../shared/bank-data-entry";
+import { map, mergeMap, toArray } from "rxjs/operators";
+import { YEARS } from "../shared/constants";
 
 @Injectable({
     providedIn: 'root'
@@ -14,14 +15,25 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         super(store);
     }
 
-    selectCurrentYear$ = this.select(state => state.selectedYear);
+    selectCurrentYear$: Observable<number> = this.select(state => state.selectedYear);
 
-    // TODO: use non deprecated version
-    selectCurrentMonthValues$ = combineLatest(
+    /**
+     * @returns the month values for the currently selected year
+     */
+    selectCurrentMonthValues$: Observable<number[]> = combineLatest([
         this.selectAll(),
-        this.selectCurrentYear$,
-        this.getMonthValues
+        this.selectCurrentYear$
+    ]).pipe(
+        map(([entries, year]) => this.getMonthValues(entries, year))
     );
+
+    /**
+     * @returns the total balance of each year
+     */
+    selectYearBalances$: Observable<number[]> = 
+        this.selectAll().pipe(
+            map(entries => YEARS.map(year => this.getMonthValues(entries, year).reduce((a,b) => a + b)))
+        );
     
     private getMonthValues(entries: BankDataEntry[], year: number): number[] {
         let returnArray: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];

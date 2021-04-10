@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { YEARS } from './shared/constants';
 import { BankDataQuery } from './state/bank.data.query';
 import { BankDataService } from './state/bank.data.service';
@@ -13,15 +13,16 @@ import { BankDataService } from './state/bank.data.service';
 export class AppComponent implements OnInit {
   years = YEARS;
   selectedYear: string;
-  yearBalances: Observable<number[]>;
+  yearBalances$: Observable<number[]> = of([]);
   series: zingchart.series = null;
 
   constructor(private bankDataQuery: BankDataQuery,
               private bankDataService: BankDataService) {
-    this.yearBalances = bankDataQuery.selectCurrentMonthValues$;
   }
   ngOnInit(): void {
     this.bankDataService.init();
+
+    this.yearBalances$ = this.bankDataQuery.selectYearBalances$;
     
     this.bankDataQuery.selectCurrentYear$
       .subscribe(year => this.selectedYear = year.toString());

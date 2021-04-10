@@ -20,6 +20,7 @@ export class BankDataService {
     }
 
     reloadData() {
+        this.bankDataStore.remove();
         this.bankDataStore.reset();
         this.loadDataFromFile('all.txt');
     }
@@ -51,14 +52,7 @@ export class BankDataService {
             this.bankDataStore.add(bankDataEntries);
         });
       }
-/*
-      private initYearBalances() {
-        this.yearBalances = [];
-        YEARS.forEach(year => {
-          this.yearBalances.push(this.getMonthValues(year).reduce((a,b) => a + b, 0));
-        });
-      }
-*/    
+ 
       private convertStringToDate(stringDate: string): SimpleDate {
         const day = parseInt(stringDate.substring(0, 2));
         const month = parseInt(stringDate.substring(3, 5));
