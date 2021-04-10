@@ -3,9 +3,9 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
 ## TODO:
+- 
 - do I have to subscribe or can I do it better?
 - service also handles saving to browser (for categories)
-- add tabs to main page --> main, categories, category assignment
 - make separate components for things
 - make the year balance thingys buttons?
 - save data to browser

@@ -13,14 +13,9 @@
 
 <mat-form-field>
     <mat-label>Select a year</mat-label>
-    <mat-select [(value)]="selectedYear" (selectionChange)="onYearSelectionChange($event)">
-        <mat-option>None</mat-option>
-        <mat-option value="2017">2017</mat-option>
-        <mat-option value="2018">2018</mat-option>
-        <mat-option value="2019">2019</mat-option>
-        <mat-option value="2020">2020</mat-option>
-        <mat-option value="2021">2021</mat-option>
+    <mat-select [value]="selectedYear$ | async" (selectionChange)="onYearSelectionChange($event)">
+        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
     </mat-select>
 </mat-form-field>
 
-<div> <zingchart-angular [config]="config" [series]="series" [height]="500"></zingchart-angular> </div>
+<div> <zingchart-angular [config]="config" [series]="series$ | async" [height]="500"></zingchart-angular> </div>

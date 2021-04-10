@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { YEARS } from 'src/app/shared/constants';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
@@ -13,9 +14,9 @@ import { BankDataService } from 'src/app/state/bank.data.service';
 export class VisualizationComponent implements OnInit {
 
   years = YEARS;
-  selectedYear: string;
+  selectedYear$: Observable<number>;
   yearBalances$: Observable<number[]> = of([]);
-  series: zingchart.series = null;
+  series$: Observable<zingchart.series>;
 
   constructor(private bankDataQuery: BankDataQuery,
               private bankDataService: BankDataService) {
@@ -24,13 +25,8 @@ export class VisualizationComponent implements OnInit {
     this.bankDataService.init();
 
     this.yearBalances$ = this.bankDataQuery.selectYearBalances$;
-    
-    this.bankDataQuery.selectCurrentYear$
-      .subscribe(year => this.selectedYear = year.toString());
-    this.bankDataQuery.selectCurrentMonthValues$
-      .subscribe(values => {
-        this.series = [{values: values}];
-      });
+    this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
+    this.series$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(map(values => [{values: values}]));
   }
   
   onYearSelectionChange(ev: MatSelectChange) {
