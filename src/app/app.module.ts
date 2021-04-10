@@ -16,6 +16,7 @@ import { AppRoutingModule } from './routing/routing.module';
 import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
 import { EntryListPageComponent } from './entry-list-page/entry-list-page/entry-list-page.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatButtonModule,
     MatTabsModule,
     MatPaginatorModule,
+    MatTableModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   bootstrap: [AppComponent]

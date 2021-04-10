@@ -11,7 +11,8 @@ import { BankDataQuery } from 'src/app/state/bank.data.query';
 })
 export class EntryListPageComponent implements OnInit {
 
-  size: number = 10;
+  columnsToDisplay = ['date', 'payer', 'amount'];
+  size: number = 10 ;
   start: number = 0;
   end: number = this.start + this.size;
   entries$: Observable<BankDataEntry[]>;

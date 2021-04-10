@@ -1,9 +1,26 @@
 <mat-paginator [length]="(entries$ | async).length"
               [pageSize]="size"
               [pageSizeOptions]="[5, 10, 25, 100]"
-              (page)="updatePageData($event)">
+              (page)="updatePageData($event)"
+              showFirstLastButtons>
 </mat-paginator>
-<ngContainer class="row" *ngFor="let entry of entries$ | async | slice : start : end">
-    <div>{{entry.paymentDate.toString()}}</div>
-    <div>{{entry.recipientOrPayer}}</div>
-</ngContainer>
+
+<table class="table" mat-table [dataSource]="entries$ | async | slice : start : end">
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let entry"> {{entry.paymentDate.toString()}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="payer">
+        <th mat-header-cell *matHeaderCellDef> Payer/Payee </th>
+        <td mat-cell *matCellDef="let entry"> {{entry.recipientOrPayer}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Amount </th>
+        <td mat-cell *matCellDef="let entry"> {{entry.amount}} </td>
+    </ng-container>
+</table>
