@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BankDataEntry } from 'src/app/shared/bank-data-entry';
+import { BankDataQuery } from 'src/app/state/bank.data.query';
 
 @Component({
   selector: 'app-entry-list-page',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EntryListPageComponent implements OnInit {
 
-  constructor() { }
+  entries$: Observable<BankDataEntry[]>;
+
+  constructor(private bankDataQuery: BankDataQuery) { }
 
   ngOnInit(): void {
+    this.entries$ = this.bankDataQuery.selectAll();
   }
 
 }

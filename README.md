@@ -3,8 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
 ## TODO:
-- 
-- do I have to subscribe or can I do it better?
+- how to organize your angular apps
 - service also handles saving to browser (for categories)
 - make separate components for things
 - make the year balance thingys buttons?

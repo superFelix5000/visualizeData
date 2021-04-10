@@ -1,1 +1,4 @@
-<p>entry-list-page works!</p>
+<mat-paginator [length]="(entries$ | async).length"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>

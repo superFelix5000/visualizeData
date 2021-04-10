@@ -14,12 +14,15 @@ import { environment } from '../environments/environment';
 import { VisualizationComponent } from './visualization-page/visualization/visualization.component';
 import { AppRoutingModule } from './routing/routing.module';
 import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
+import { EntryListPageComponent } from './entry-list-page/entry-list-page/entry-list-page.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AppComponent,
     VisualizationComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    EntryListPageComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { LandingPageComponent } from './landing-page/landing-page/landing-page.c
     MatSelectModule,
     MatButtonModule,
     MatTabsModule,
+    MatPaginatorModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   bootstrap: [AppComponent]
