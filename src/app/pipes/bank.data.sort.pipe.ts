@@ -24,22 +24,22 @@ export class BankDataSortPipe implements PipeTransform {
         let dateB = b.paymentDate;
 
         if(dateA.year > dateB.year) {
-            return direction === DataEntrySortDirection.asc ? -1 : 1;
+            return direction === DataEntrySortDirection.asc ? 1 : -1;
         }
         if(dateA.year < dateB.year) {
-            return direction === DataEntrySortDirection.asc ? 1 : -1;
+            return direction === DataEntrySortDirection.asc ? -1 : 1;
         }
         if(dateA.month > dateB.month) {
-            return direction === DataEntrySortDirection.asc ? -1 : 1;
+            return direction === DataEntrySortDirection.asc ? 1 : -1;
         }
         if(dateA.month < dateB.month) {
-            return direction === DataEntrySortDirection.asc ? 1 : -1;
-        }
-        if(dateA.day > dateB.day) {
             return direction === DataEntrySortDirection.asc ? -1 : 1;
         }
-        if(dateA.day < dateB.day) {
+        if(dateA.day > dateB.day) {
             return direction === DataEntrySortDirection.asc ? 1 : -1;
+        }
+        if(dateA.day < dateB.day) {
+            return direction === DataEntrySortDirection.asc ? -1 : 1;
         }
         return 0;
     }

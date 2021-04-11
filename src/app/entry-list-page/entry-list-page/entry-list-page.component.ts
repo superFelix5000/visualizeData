@@ -25,7 +25,7 @@ export enum DataEntrySortDirection {
 })
 export class EntryListPageComponent implements OnInit {
 
-  columnsToDisplay = ['date', 'recipient', 'amount'];
+  columnsToDisplay = ['date', 'recipient', 'amount', 'event', 'message'];
   size: number = 10 ;
   start: number = 0;
   end: number = this.start + this.size;
