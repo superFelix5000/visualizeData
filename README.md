@@ -3,12 +3,14 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
 
 ## TODO:
+- create categories
+- how to save category assignment?
 - how to organize your angular apps
 - service also handles saving to browser (for categories)
 - make separate components for things
 - make the year balance thingys buttons?
 - save data to browser
-- make categories dynamic on other tab
+- make categories dynamic on other tab?
 - make all entries taggable with extra words?
 - show categories in cake diagram per year/month/overall
 - use newest typescript?
