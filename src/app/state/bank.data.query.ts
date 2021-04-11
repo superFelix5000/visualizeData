@@ -1,6 +1,6 @@
 import { QueryEntity } from "@datorama/akita";
 import { combineLatest, Observable, of } from "rxjs";
-import { BankDataState, BankDataStore } from "./bank.data.store";
+import { BankDataState, BankDataStore, DataEntrySort, DataEntrySortDirection } from "./bank.data.store";
 import { Injectable } from "@angular/core";
 import { BankDataEntry } from "../shared/bank-data-entry";
 import { map, mergeMap, toArray } from "rxjs/operators";
@@ -14,6 +14,9 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
     constructor(protected store: BankDataStore) {
         super(store);
     }
+
+    selectSort$: Observable<DataEntrySort> = this.select(state => state.dataEntrySort);
+    selectSortDirection$: Observable<DataEntrySortDirection> = this.select(state => state.dataEntrySortDirection);
 
     selectCurrentYear$: Observable<number> = this.select(state => state.selectedYear);
 

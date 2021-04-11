@@ -17,13 +17,16 @@ import { LandingPageComponent } from './landing-page/landing-page/landing-page.c
 import { EntryListPageComponent } from './entry-list-page/entry-list-page/entry-list-page.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     VisualizationComponent,
     LandingPageComponent,
-    EntryListPageComponent
+    EntryListPageComponent,
+    BankDataSortPipe
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import {MatTableModule} from '@angular/material/table';
     MatTabsModule,
     MatPaginatorModule,
     MatTableModule,
+    MatSortModule,
     environment.production ? [] : AkitaNgDevtools.forRoot()
   ],
   bootstrap: [AppComponent]
