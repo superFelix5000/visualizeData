@@ -5,7 +5,18 @@ import { Observable } from 'rxjs';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
-import { DataEntrySort, DataEntrySortDirection } from 'src/app/state/bank.data.store';
+
+export enum DataEntrySort {
+  date = 'date',
+  recipient = 'recipient',
+  amount = 'amount'
+}
+
+export enum DataEntrySortDirection {
+  NONE = '',
+  asc = 'asc',
+  desc = 'desc'
+}
 
 @Component({
   selector: 'app-entry-list-page',
@@ -27,12 +38,6 @@ export class EntryListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.entries$ = this.bankDataQuery.selectAll();
-    this.bankDataQuery.selectSort$.subscribe(sort => {
-        this.sort = sort;
-    });
-    this.bankDataQuery.selectSortDirection$.subscribe(dir => {
-        this.sortDirection = dir;
-    });
   }
 
   updatePageData(event: PageEvent) {
@@ -42,10 +47,8 @@ export class EntryListPageComponent implements OnInit {
   }
 
   onSortChange(event: Sort) {
-    let sort = event.active as keyof typeof DataEntrySort;
-    let direction = event.direction as keyof typeof DataEntrySortDirection;
-    this.bankDataService.setSort(DataEntrySort[sort]);
-    this.bankDataService.setSortDirection(DataEntrySortDirection[direction]);
+    this.sort = DataEntrySort[event.active as keyof typeof DataEntrySort];
+    this.sortDirection = DataEntrySortDirection[event.direction as keyof typeof DataEntrySortDirection];
     console.log(event);
   }
 

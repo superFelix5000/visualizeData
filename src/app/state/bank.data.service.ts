@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgxCsvParser } from 'ngx-csv-parser';
 import { BankDataEntry } from '../shared/bank-data-entry';
 import { SimpleDate } from '../shared/simple-date';
-import {BankDataStore, DataEntrySort, DataEntrySortDirection} from './bank.data.store';
+import {BankDataStore} from './bank.data.store';
 
 @Injectable({providedIn: "root"})
 export class BankDataService {
@@ -17,15 +17,6 @@ export class BankDataService {
 
     setYear(year: number) {
         this.bankDataStore.update(state => ({selectedYear: year}));
-    }
-
-    setSort(sort: DataEntrySort) {
-        this.bankDataStore.update(state => ({dataEntrySort: sort}));
-    }
-
-    setSortDirection(sortDirection: DataEntrySortDirection) {
-        this.bankDataStore.update(state => ({dataEntrySortDirection: sortDirection != undefined ? 
-          sortDirection : DataEntrySortDirection.NONE}));
     }
 
     reloadData() {
