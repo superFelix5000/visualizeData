@@ -53,4 +53,8 @@ export class EntryListPageComponent implements OnInit {
     this.sortDirection = DataEntrySortDirection[event.direction as keyof typeof DataEntrySortDirection];
   }
 
+  onCategorySelectionChange(entry, event) {
+    console.log(event);
+  }
+
 }
