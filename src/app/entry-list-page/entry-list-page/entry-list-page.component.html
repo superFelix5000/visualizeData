@@ -34,4 +34,13 @@
         <th mat-header-cell *matHeaderCellDef> Message </th>
         <td mat-cell *matCellDef="let entry"> {{entry.message}} </td>
     </ng-container>
+
+    <ng-container matColumnDef="category">
+        <th mat-header-cell *matHeaderCellDef> Category </th>
+        <td mat-cell *matCellDef="let entry">
+            <mat-select [value]="entry.category">
+                <mat-option *ngFor="let category of categoryType | keyvalue" [value]="category.value">{{category.value}}</mat-option>
+            </mat-select>
+        </td>
+    </ng-container>
 </table>

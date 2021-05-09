@@ -1,5 +1,6 @@
 import { SimpleDate } from "./simple-date";
 import { guid } from '@datorama/akita';
+import { Category } from "./categories";
 
 export class BankDataEntry {
     id: string;
@@ -16,6 +17,7 @@ export class BankDataEntry {
     message: string;
     cardNumber: number;
     receipt: string;
+    category: Category;
 
     constructor(
         postingDate: SimpleDate,
@@ -45,5 +47,6 @@ export class BankDataEntry {
             this.message = message;
             this.cardNumber = cardNumber;
             this.receipt = receipt;
+            this.category = Category.OTHER;
         }
 }
