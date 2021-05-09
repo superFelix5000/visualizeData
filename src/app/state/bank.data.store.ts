@@ -3,7 +3,7 @@ import { BankDataEntry } from "../shared/bank-data-entry";
 import { Injectable } from '@angular/core';
 import { YEARS } from "../shared/constants";
 
-export interface BankDataState extends EntityState<BankDataEntry> {
+export interface BankDataState extends EntityState<BankDataEntry, string> {
     selectedYear: number,
 }
   

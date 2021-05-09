@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSelectChange } from '@angular/material/select';
 import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
@@ -53,8 +54,8 @@ export class EntryListPageComponent implements OnInit {
     this.sortDirection = DataEntrySortDirection[event.direction as keyof typeof DataEntrySortDirection];
   }
 
-  onCategorySelectionChange(entry, event) {
-    console.log(event);
+  onCategorySelectionChange(entry: BankDataEntry, event: MatSelectChange) {
+    this.bankDataService.updateEntry(entry.id, {category: Category[event.value]})
   }
 
 }

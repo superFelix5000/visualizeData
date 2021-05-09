@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgxCsvParser } from 'ngx-csv-parser';
-import { BankDataEntry } from '../shared/bank-data-entry';
+import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
 import { SimpleDate } from '../shared/simple-date';
 import {BankDataStore} from './bank.data.store';
 
@@ -33,7 +33,7 @@ export class BankDataService {
             entries
               .filter(entry => entry.length > 3)
               .forEach(entry => {
-                bankDataEntries.push(new BankDataEntry(
+                bankDataEntries.push(createBankDataEntry(
                   this.convertStringToDate(entry[0]),
                   this.convertStringToDate(entry[1]),
                   this.convertStringToDate(entry[2]),
@@ -51,6 +51,10 @@ export class BankDataService {
               });
             this.bankDataStore.add(bankDataEntries);
         });
+      }
+
+      updateEntry(id: string, entry: Partial<BankDataEntry>) {
+        this.bankDataStore.update(id, entry);
       }
  
       private convertStringToDate(stringDate: string): SimpleDate {
