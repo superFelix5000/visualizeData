@@ -1,2 +1,3 @@
 src/assets/all.txt
 node_modules/
+dist/**

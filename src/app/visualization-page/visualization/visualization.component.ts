@@ -38,7 +38,7 @@ export class VisualizationComponent implements OnInit {
     type: 'bar', 
     "scale-x": {
         label: { text: 'Months' },       
-        values: [ 'January', 'Feb', 'March', 'April', 'May', 'JinitMapBalancesune', 'July', 'August', 'September', 'October', 'November', 'December']
+        values: [ 'January', 'Feb', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     }
   };
 
