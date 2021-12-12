@@ -28,39 +28,39 @@ export class BankDataService {
     private loadDataFromFile(file: string) {
         let bankDataEntries: BankDataEntry[] = [];
         this.http.get('assets/' + file, { responseType: 'text'})
-          .subscribe(data => {
-            const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
-            entries
-              .filter(entry => entry.length > 3)
-              .forEach(entry => {
-                bankDataEntries.push(createBankDataEntry(
-                  this.convertStringToDate(entry[0]),
-                  this.convertStringToDate(entry[1]),
-                  this.convertStringToDate(entry[2]),
-                  parseFloat(entry[3].replace(',', '.')),
-                  (entry[4] as string).toLowerCase(),
-                  entry[5],
-                  entry[6],
-                  entry[7],
-                  entry[8],
-                  entry[9],
-                  entry[10],
-                  entry[11],
-                  entry[12]
-                ));
-              });
-            this.bankDataStore.add(bankDataEntries);
-        });
-      }
+            .subscribe(data => {
+                const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
+                entries
+                    .filter(entry => entry.length > 3)
+                    .forEach(entry => {
+                        bankDataEntries.push(createBankDataEntry(
+                            this.convertStringToDate(entry[0]),
+                            this.convertStringToDate(entry[1]),
+                            this.convertStringToDate(entry[2]),
+                            parseFloat(entry[3].replace(',', '.')),
+                            (entry[4] as string).toLowerCase(),
+                            entry[5],
+                            entry[6],
+                            entry[7],
+                            entry[8],
+                            entry[9],
+                            entry[10],
+                            entry[11],
+                            entry[12]
+                        ));
+                    });
+                this.bankDataStore.add(bankDataEntries);
+            });
+    }
 
-      updateEntry(id: string, entry: Partial<BankDataEntry>) {
+    updateEntry(id: string, entry: Partial<BankDataEntry>) {
         this.bankDataStore.update(id, entry);
-      }
+    }
  
-      private convertStringToDate(stringDate: string): SimpleDate {
+    private convertStringToDate(stringDate: string): SimpleDate {
         const day = parseInt(stringDate.substring(0, 2));
         const month = parseInt(stringDate.substring(3, 5));
         const year = parseInt(stringDate.substring(6, 10));
         return new SimpleDate(day, month, year);
-      }
+    }
 }

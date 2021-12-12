@@ -8,12 +8,12 @@ export class BankDataSortPipe implements PipeTransform {
     transform(value: BankDataEntry[], sort: DataEntrySort, sortDirection: DataEntrySortDirection) {
         if (sortDirection != null && sortDirection != DataEntrySortDirection.NONE) {
             switch(sort) {
-                case DataEntrySort.amount:
-                    return value.sort((a,b) => this.sortByNumberValue(a,b,sortDirection));
-                case DataEntrySort.recipient:
-                    return value.sort((a,b) => this.sortByRecipient(a,b,sortDirection));
-                case DataEntrySort.date:
-                    return value.sort((a,b) => this.sortByDate(a,b,sortDirection));
+            case DataEntrySort.amount:
+                return value.sort((a,b) => this.sortByNumberValue(a,b,sortDirection));
+            case DataEntrySort.recipient:
+                return value.sort((a,b) => this.sortByRecipient(a,b,sortDirection));
+            case DataEntrySort.date:
+                return value.sort((a,b) => this.sortByDate(a,b,sortDirection));
             }
         }
         return value;
@@ -60,12 +60,12 @@ export class BankDataSortPipe implements PipeTransform {
         const nameA = a.recipientOrPayer;
         const nameB = b.recipientOrPayer;
         if (nameA < nameB) {
-          return direction === DataEntrySortDirection.asc ? -1 : 1;
+            return direction === DataEntrySortDirection.asc ? -1 : 1;
         }
         if (nameA > nameB) {
-          return direction === DataEntrySortDirection.asc ? 1 : -1;
+            return direction === DataEntrySortDirection.asc ? 1 : -1;
         }
       
         return 0;
-      }
+    }
 }

@@ -4,19 +4,19 @@ import { LandingPageComponent } from '../landing-page/landing-page/landing-page.
 import { VisualizationComponent } from '../visualization-page/visualization/visualization.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'visualization'
-  },
-  {
-    path: 'visualization',
-    component: LandingPageComponent
-  },
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'visualization'
+    },
+    {
+        path: 'visualization',
+        component: LandingPageComponent
+    },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRoutingModule { }

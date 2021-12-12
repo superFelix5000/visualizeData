@@ -4,4 +4,4 @@ export const YEARS:number[] = [
     2019,
     2020,
     2021
-  ];
+];

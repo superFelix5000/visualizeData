@@ -21,9 +21,9 @@ export enum DataEntrySortDirection {
 }
 
 @Component({
-  selector: 'app-entry-list-page',
-  templateUrl: './entry-list-page.component.html',
-  styleUrls: ['./entry-list-page.component.scss']
+    selector: 'app-entry-list-page',
+    templateUrl: './entry-list-page.component.html',
+    styleUrls: ['./entry-list-page.component.scss']
 })
 export class EntryListPageComponent implements OnInit {
 
@@ -40,22 +40,22 @@ export class EntryListPageComponent implements OnInit {
               private bankDataService: BankDataService) { }
 
   ngOnInit(): void {
-    this.entries$ = this.bankDataQuery.selectAll();
+      this.entries$ = this.bankDataQuery.selectAll();
   }
 
   updatePageData(event: PageEvent) {
-    this.size = event.pageSize;
-    this.start = event.pageIndex * event.pageSize;
-    this.end = this.start + event.pageSize;
+      this.size = event.pageSize;
+      this.start = event.pageIndex * event.pageSize;
+      this.end = this.start + event.pageSize;
   }
 
   onSortChange(event: Sort) {
-    this.sort = DataEntrySort[event.active as keyof typeof DataEntrySort];
-    this.sortDirection = DataEntrySortDirection[event.direction as keyof typeof DataEntrySortDirection];
+      this.sort = DataEntrySort[event.active as keyof typeof DataEntrySort];
+      this.sortDirection = DataEntrySortDirection[event.direction as keyof typeof DataEntrySortDirection];
   }
 
   onCategorySelectionChange(entry: BankDataEntry, event: MatSelectChange) {
-    this.bankDataService.updateEntry(entry.id, {category: Category[event.value]})
+      this.bankDataService.updateEntry(entry.id, {category: Category[event.value]})
   }
 
 }

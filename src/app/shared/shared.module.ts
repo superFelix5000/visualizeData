@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FinanceDataService } from './financeDataService';
 
 @NgModule({
-  declarations: [FinanceDataService],
-  imports: [
-    CommonModule
-  ]
+    declarations: [FinanceDataService],
+    imports: [
+        CommonModule
+    ]
 })
 export class SharedModule { }

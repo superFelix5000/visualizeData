@@ -21,30 +21,30 @@ import { MatSortModule } from '@angular/material/sort';
 import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    VisualizationComponent,
-    LandingPageComponent,
-    EntryListPageComponent,
-    BankDataSortPipe
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    ZingchartAngularModule,
-    NgxCsvParserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatSortModule,
-    environment.production ? [] : AkitaNgDevtools.forRoot()
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        VisualizationComponent,
+        LandingPageComponent,
+        EntryListPageComponent,
+        BankDataSortPipe
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        ZingchartAngularModule,
+        NgxCsvParserModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatSortModule,
+        environment.production ? [] : AkitaNgDevtools.forRoot()
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

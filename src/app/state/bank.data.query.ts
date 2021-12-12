@@ -8,7 +8,7 @@ import { YEARS } from "../shared/constants";
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class BankDataQuery extends QueryEntity<BankDataState> {
 
     constructor(protected store: BankDataStore) {
@@ -38,11 +38,11 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
     private getMonthValues(entries: BankDataEntry[], year: number): number[] {
         let returnArray: number[] = [0,0,0,0,0,0,0,0,0,0,0,0];
         for(var i = 0; i < 12; i++) {
-          returnArray[i] = (entries
-            .filter(entry => entry.paymentDate.year === year)
-            .filter(entry => entry.paymentDate.month === i + 1)
-            .map(entry => entry.amount)
-            .reduce((a,b) => a + b, 0));  
+            returnArray[i] = (entries
+                .filter(entry => entry.paymentDate.year === year)
+                .filter(entry => entry.paymentDate.month === i + 1)
+                .map(entry => entry.amount)
+                .reduce((a,b) => a + b, 0));  
         }
         return returnArray;
     }
