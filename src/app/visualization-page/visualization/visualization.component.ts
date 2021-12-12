@@ -16,7 +16,7 @@ export class VisualizationComponent implements OnInit {
     years = YEARS;
     selectedYear$: Observable<number>;
     yearBalances$: Observable<number[]> = of([]);
-    series$: Observable<zingchart.series>;
+    series$: Observable<zingchart.series[]>;
 
     constructor(private bankDataQuery: BankDataQuery,
         private bankDataService: BankDataService) {
@@ -44,6 +44,11 @@ export class VisualizationComponent implements OnInit {
 
     reloadData() {
         this.bankDataService.reloadData();
+    }
+
+    // TODO: bubble event or send to store selected month and react to that
+    nodeClicked(ev) {
+        console.log(ev);
     }
 
 }

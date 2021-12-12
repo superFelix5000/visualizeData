@@ -18,4 +18,4 @@
     </mat-select>
 </mat-form-field>
 
-<div> <zingchart-angular [config]="config" [series]="series$ | async" [height]="500"></zingchart-angular> </div>
+<div> <zingchart-angular (node_click)="nodeClicked($event)" [config]="config" [series]="series$ | async" [height]="500"></zingchart-angular> </div>
