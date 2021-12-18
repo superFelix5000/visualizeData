@@ -1,9 +1,3 @@
-:host {
-    h2 {
-        margin-bottom: 5px;
-    }
-}
-
 .yearBalances {
     display: flex;
     flex-flow: row;
@@ -18,10 +12,6 @@
 .yearBalance {
     display: flex;
     flex-direction: row;
-
-    h4 {
-        margin-left: 15px;
-    }
 }
 
 .positive {

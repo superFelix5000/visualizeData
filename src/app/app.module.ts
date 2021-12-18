@@ -19,6 +19,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
+import { UploadComponent } from './upload-page/upload-component/upload.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
         VisualizationComponent,
         LandingPageComponent,
         EntryListPageComponent,
-        BankDataSortPipe
+        BankDataSortPipe,
+        UploadComponent
     ],
     imports: [
         BrowserModule,
