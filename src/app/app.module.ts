@@ -6,7 +6,7 @@ import { ZingchartAngularModule } from 'zingchart-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
@@ -15,8 +15,8 @@ import { VisualizationComponent } from './visualization-page/visualization/visua
 import { AppRoutingModule } from './routing/routing.module';
 import { LandingPageComponent } from './landing-page/landing-page/landing-page.component';
 import { EntryListPageComponent } from './entry-list-page/entry-list-page/entry-list-page.component';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
 import { UploadComponent } from './upload-page/upload-component/upload.component';
@@ -28,7 +28,7 @@ import { UploadComponent } from './upload-page/upload-component/upload.component
         LandingPageComponent,
         EntryListPageComponent,
         BankDataSortPipe,
-        UploadComponent
+        UploadComponent,
     ],
     imports: [
         BrowserModule,
@@ -45,8 +45,8 @@ import { UploadComponent } from './upload-page/upload-component/upload.component
         MatPaginatorModule,
         MatTableModule,
         MatSortModule,
-        environment.production ? [] : AkitaNgDevtools.forRoot()
+        environment.production ? [] : AkitaNgDevtools.forRoot(),
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

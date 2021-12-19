@@ -9,53 +9,68 @@ import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
 
 export enum DataEntrySort {
-  date = 'date',
-  recipient = 'recipient',
-  amount = 'amount'
+    date = 'date',
+    recipient = 'recipient',
+    amount = 'amount',
 }
 
 export enum DataEntrySortDirection {
-  NONE = '',
-  asc = 'asc',
-  desc = 'desc'
+    NONE = '',
+    asc = 'asc',
+    desc = 'desc',
 }
 
 @Component({
     selector: 'app-entry-list-page',
     templateUrl: './entry-list-page.component.html',
-    styleUrls: ['./entry-list-page.component.scss']
+    styleUrls: ['./entry-list-page.component.scss'],
 })
 export class EntryListPageComponent implements OnInit {
+    columnsToDisplay = [
+        'date',
+        'recipient',
+        'amount',
+        'event',
+        'message',
+        'category',
+    ];
+    size = 10;
+    start = 0;
+    end: number = this.start + this.size;
+    entries$: Observable<BankDataEntry[]>;
+    sort: DataEntrySort;
+    sortDirection: DataEntrySortDirection;
+    categoryType = Category;
 
-  columnsToDisplay = ['date', 'recipient', 'amount', 'event', 'message', 'category'];
-  size: number = 10 ;
-  start: number = 0;
-  end: number = this.start + this.size;
-  entries$: Observable<BankDataEntry[]>;
-  sort: DataEntrySort;
-  sortDirection: DataEntrySortDirection;
-  categoryType = Category;
+    constructor(
+        private bankDataQuery: BankDataQuery,
+        private bankDataService: BankDataService
+    ) {}
 
-  constructor(private bankDataQuery: BankDataQuery,
-              private bankDataService: BankDataService) { }
+    ngOnInit(): void {
+        this.entries$ = this.bankDataQuery.selectAll();
+    }
 
-  ngOnInit(): void {
-      this.entries$ = this.bankDataQuery.selectAll();
-  }
+    updatePageData(event: PageEvent): void {
+        this.size = event.pageSize;
+        this.start = event.pageIndex * event.pageSize;
+        this.end = this.start + event.pageSize;
+    }
 
-  updatePageData(event: PageEvent) {
-      this.size = event.pageSize;
-      this.start = event.pageIndex * event.pageSize;
-      this.end = this.start + event.pageSize;
-  }
+    onSortChange(event: Sort): void {
+        this.sort = DataEntrySort[event.active as keyof typeof DataEntrySort];
+        this.sortDirection =
+            DataEntrySortDirection[
+                event.direction as keyof typeof DataEntrySortDirection
+            ];
+    }
 
-  onSortChange(event: Sort) {
-      this.sort = DataEntrySort[event.active as keyof typeof DataEntrySort];
-      this.sortDirection = DataEntrySortDirection[event.direction as keyof typeof DataEntrySortDirection];
-  }
-
-  onCategorySelectionChange(entry: BankDataEntry, event: MatSelectChange) {
-      this.bankDataService.updateEntry(entry.id, {category: Category[event.value]})
-  }
-
+    onCategorySelectionChange(
+        entry: BankDataEntry,
+        event: MatSelectChange
+    ): void {
+        this.bankDataService.updateEntry(entry.id, {
+            category: Category[event.value],
+        });
+    }
 }

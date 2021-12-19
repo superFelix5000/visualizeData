@@ -1,6 +1,6 @@
-import { SimpleDate } from "./simple-date";
+import { SimpleDate } from './simple-date';
 import { guid } from '@datorama/akita';
-import { Category } from "./categories";
+import { Category } from './categories';
 
 export type BankDataEntry = {
     id: string;
@@ -18,7 +18,7 @@ export type BankDataEntry = {
     cardNumber: number;
     receipt: string;
     category: Category;
-}
+};
 
 export function createBankDataEntry(
     postingDate: SimpleDate,
@@ -33,7 +33,8 @@ export function createBankDataEntry(
     payerReference: string,
     message: string,
     cardNumber: number,
-    receipt: string ){
+    receipt: string
+) {
     return {
         id: guid(),
         postingDate: postingDate,
@@ -49,6 +50,6 @@ export function createBankDataEntry(
         message: message,
         cardNumber: cardNumber,
         receipt: receipt,
-        category: Category.OTHER
+        category: Category.OTHER,
     } as BankDataEntry;
 }

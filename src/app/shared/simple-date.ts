@@ -1,7 +1,6 @@
-import { ThrowStmt } from "@angular/compiler";
+import { ThrowStmt } from '@angular/compiler';
 
 export class SimpleDate {
-
     day: number;
     month: number;
     year: number;
@@ -13,7 +12,12 @@ export class SimpleDate {
     }
 
     toString(): string {
-        return this.day.toString() + '.' + this.month.toString() + '.' + this.year.toString();
+        return (
+            this.day.toString() +
+            '.' +
+            this.month.toString() +
+            '.' +
+            this.year.toString()
+        );
     }
-
 }

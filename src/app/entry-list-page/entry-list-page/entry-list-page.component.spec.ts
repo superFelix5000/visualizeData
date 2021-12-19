@@ -8,9 +8,8 @@ describe('EntryListPageComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ EntryListPageComponent ]
-        })
-            .compileComponents();
+            declarations: [EntryListPageComponent],
+        }).compileComponents();
     });
 
     beforeEach(() => {

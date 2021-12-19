@@ -7,16 +7,16 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'visualization'
+        redirectTo: 'visualization',
     },
     {
         path: 'visualization',
-        component: LandingPageComponent
+        component: LandingPageComponent,
     },
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

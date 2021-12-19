@@ -4,8 +4,6 @@ import { FinanceDataService } from './financeDataService';
 
 @NgModule({
     declarations: [FinanceDataService],
-    imports: [
-        CommonModule
-    ]
+    imports: [CommonModule],
 })
-export class SharedModule { }
+export class SharedModule {}
