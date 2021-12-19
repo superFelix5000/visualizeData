@@ -12,7 +12,7 @@
         *ngIf="(yearBalances$ | async).length > 0"
     >
         <div
-            class="flex flex-row m-5 p-5 bg-slate-200 rounded-lg"
+            class="flex flex-row m-5 p-5 bg-slate-100 hover:bg-slate-200 rounded-lg shadow-xl"
             *ngFor="let yearBalance of yearBalances$ | async; let i = index"
         >
             <h3 class="font-bold">{{ years[i] }}</h3>
