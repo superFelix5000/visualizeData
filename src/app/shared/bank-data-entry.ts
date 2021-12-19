@@ -34,7 +34,7 @@ export function createBankDataEntry(
     message: string,
     cardNumber: number,
     receipt: string
-) {
+): BankDataEntry {
     return {
         id: guid(),
         postingDate: postingDate,

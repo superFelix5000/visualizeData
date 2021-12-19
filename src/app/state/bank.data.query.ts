@@ -1,9 +1,9 @@
 import { QueryEntity } from '@datorama/akita';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { BankDataState, BankDataStore } from './bank.data.store';
 import { Injectable } from '@angular/core';
 import { BankDataEntry } from '../shared/bank-data-entry';
-import { map, mergeMap, toArray } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { YEARS } from '../shared/constants';
 
 @Injectable({
@@ -39,7 +39,7 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
 
     private getMonthValues(entries: BankDataEntry[], year: number): number[] {
         const returnArray: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        for (var i = 0; i < 12; i++) {
+        for (let i = 0; i < 12; i++) {
             returnArray[i] = entries
                 .filter((entry) => entry.paymentDate.year === year)
                 .filter((entry) => entry.paymentDate.month === i + 1)

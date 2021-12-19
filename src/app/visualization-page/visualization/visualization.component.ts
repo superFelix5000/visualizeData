@@ -21,6 +21,7 @@ export class VisualizationComponent implements OnInit {
         private bankDataQuery: BankDataQuery,
         private bankDataService: BankDataService
     ) {}
+
     ngOnInit(): void {
         this.bankDataService.init();
 
@@ -31,7 +32,7 @@ export class VisualizationComponent implements OnInit {
         );
     }
 
-    onYearSelectionChange(ev: MatSelectChange) {
+    onYearSelectionChange(ev: MatSelectChange): void {
         this.bankDataService.setYear(parseInt(ev.value));
     }
 
@@ -57,12 +58,12 @@ export class VisualizationComponent implements OnInit {
         },
     };
 
-    reloadData() {
+    reloadData(): void {
         this.bankDataService.reloadData();
     }
 
     // TODO: bubble event or send to store selected month and react to that
-    nodeClicked(ev) {
+    nodeClicked(ev): void {
         console.log(ev);
     }
 }

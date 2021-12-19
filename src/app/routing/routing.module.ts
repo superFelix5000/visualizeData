@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from '../landing-page/landing-page/landing-page.component';
-import { VisualizationComponent } from '../visualization-page/visualization/visualization.component';
 
 const routes: Routes = [
     {

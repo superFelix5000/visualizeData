@@ -21,13 +21,13 @@ export class BankDataService {
         this.bankDataStore.update((state) => ({ selectedYear: year }));
     }
 
-    reloadData() {
+    reloadData(): void {
         this.bankDataStore.remove();
         this.bankDataStore.reset();
         this.loadDataFromFile('all.txt');
     }
 
-    private loadDataFromFile(file: string) {
+    private loadDataFromFile(file: string): void {
         const bankDataEntries: BankDataEntry[] = [];
         this.http
             .get('assets/' + file, { responseType: 'text' })

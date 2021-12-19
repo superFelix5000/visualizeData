@@ -11,7 +11,7 @@ export class BankDataSortPipe implements PipeTransform {
         value: BankDataEntry[],
         sort: DataEntrySort,
         sortDirection: DataEntrySortDirection
-    ) {
+    ): BankDataEntry[] {
         if (
             sortDirection != null &&
             sortDirection != DataEntrySortDirection.NONE
