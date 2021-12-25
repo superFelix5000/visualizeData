@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSelectChange } from '@angular/material/select';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { YEARS } from 'src/app/shared/constants';
@@ -13,29 +12,10 @@ import { BankDataService } from 'src/app/state/bank.data.service';
 })
 export class VisualizationComponent implements OnInit {
     years = YEARS;
+    // TODO: not used atm
     selectedYear$: Observable<number>;
     yearBalances$: Observable<number[]> = of([]);
     series$: Observable<zingchart.series[]>;
-
-    constructor(
-        private bankDataQuery: BankDataQuery,
-        private bankDataService: BankDataService
-    ) {}
-
-    ngOnInit(): void {
-        this.bankDataService.init();
-
-        this.yearBalances$ = this.bankDataQuery.selectYearBalances$;
-        this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
-        this.series$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
-            map((values) => [{ values: values }])
-        );
-    }
-
-    onYearSelectionChange(year: number): void {
-        this.bankDataService.setYear(year);
-    }
-
     config: zingchart.graphset = {
         type: 'bar',
         plot: {
@@ -65,6 +45,27 @@ export class VisualizationComponent implements OnInit {
             ],
         },
     };
+
+    constructor(
+        private bankDataQuery: BankDataQuery,
+        private bankDataService: BankDataService
+    ) {}
+
+    ngOnInit(): void {
+        this.bankDataService.init();
+
+        this.yearBalances$ = this.bankDataQuery.selectYearBalances$;
+        this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
+        this.series$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
+            map((values) => [{ values: values }])
+        );
+    }
+
+    onYearSelectionChange(year: number): void {
+        this.bankDataService.setYear(year);
+    }
+
+    
 
     reloadData(): void {
         this.bankDataService.reloadData();

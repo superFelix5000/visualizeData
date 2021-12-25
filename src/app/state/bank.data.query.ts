@@ -3,8 +3,10 @@ import { combineLatest, Observable } from 'rxjs';
 import { BankDataState, BankDataStore } from './bank.data.store';
 import { Injectable } from '@angular/core';
 import { BankDataEntry } from '../shared/bank-data-entry';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { YEARS } from '../shared/constants';
+import { CategoryPercentage } from '../shared/category-percentage';
+import { Category } from '../shared/categories';
 
 @Injectable({
     providedIn: 'root',
@@ -47,5 +49,45 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
                 .reduce((a, b) => a + b, 0);
         }
         return returnArray;
+    }
+
+    selectAllEntriesPerSelectedYear$: Observable<BankDataEntry[]> = combineLatest([
+        this.selectAll(),
+        this.selectCurrentYear$,
+    ]).pipe(
+        map(([entries, year]) => entries.filter(entry => entry.paymentDate.year === year))
+    );
+
+    /**
+     * @returns the total amount for the selected year that I payed
+     */
+    selectTotalPaymentAmountForSelectedYear$: Observable<number> = 
+        this.selectAllEntriesPerSelectedYear$.pipe(
+            map(entries => entries.filter(entry => entry.amount < 0)),
+            map(entries => entries.reduce((a,b) => a + b.amount, 0))
+        );
+
+    /**
+     * @returns all the categories for the selected year and their percentage of the total amount to pay
+     */
+     selectAllCategoriesPerSelectedYear$: Observable<CategoryPercentage[]> = combineLatest([
+        this.selectTotalPaymentAmountForSelectedYear$,
+        this.selectAllEntriesPerSelectedYear$
+     ])
+        .pipe(
+            map(([totalYearAmount, yearEntries]) => this.getCategoryValues(yearEntries, totalYearAmount)
+        ));
+
+    private getCategoryValues(entries: BankDataEntry[], totalYearAmount: number): CategoryPercentage[] {        
+        let categoryPercentages:CategoryPercentage[] = [];
+        for (const cat in Category) {
+            const category = Category[cat];
+            const totalCategoryAmount = entries
+                .filter(entry => entry.amount < 0)
+                .filter(entry => entry.category === category)
+                .reduce((a, b) => a + Math.abs(b.amount), 0);
+            categoryPercentages.push({category, percentage: totalCategoryAmount / Math.abs(totalYearAmount)});
+        }
+        return categoryPercentages;
     }
 }

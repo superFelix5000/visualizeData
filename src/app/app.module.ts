@@ -22,6 +22,7 @@ import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
 import { UploadComponent } from './upload-page/upload-component/upload.component';
 import { EntryListComponent } from './entry-list/entry-list.component';
 import { PrintSimpleDatePipe } from './pipes/print.simple.date.pipe';
+import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 
 @NgModule({
     declarations: [
@@ -33,6 +34,7 @@ import { PrintSimpleDatePipe } from './pipes/print.simple.date.pipe';
         BankDataSortPipe,
         PrintSimpleDatePipe,
         UploadComponent,
+        PieChartComponent,
     ],
     imports: [
         BrowserModule,
