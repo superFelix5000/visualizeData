@@ -32,8 +32,8 @@ export class VisualizationComponent implements OnInit {
         );
     }
 
-    onYearSelectionChange(ev: MatSelectChange): void {
-        this.bankDataService.setYear(parseInt(ev.value));
+    onYearSelectionChange(year: number): void {
+        this.bankDataService.setYear(year);
     }
 
     config: zingchart.graphset = {
