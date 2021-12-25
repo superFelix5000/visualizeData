@@ -3,13 +3,10 @@ import { Injectable } from '@angular/core';
 import { NgxCsvParser } from 'ngx-csv-parser';
 import { Observable } from 'rxjs';
 import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
+import { ServerData } from '../shared/server-data';
 import { SimpleDate } from '../shared/simple-date';
 import { BankDataStore } from './bank.data.store';
 
-type ServerData = {
-    success: boolean;
-    data: BankDataEntry[];
-};
 @Injectable({ providedIn: 'root' })
 export class BankDataService {
     private readonly baseUrl = 'http://localhost:8000';
@@ -33,9 +30,6 @@ export class BankDataService {
         this.bankDataStore.reset();
         this.downloadAll().subscribe((data: ServerData) => {
             this.bankDataStore.add(data.data);
-            // this.loadDataFromLocalFile('all.txt').subscribe((text) => {
-            //     this.bankDataStore.add(this.readBankDataEntriesFromData(text));
-            // });
         });
     }
 

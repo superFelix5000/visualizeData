@@ -5,8 +5,8 @@ import { Sort } from '@angular/material/sort';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
 import { BankDataService } from 'src/app/state/bank.data.service';
-import { DataEntrySort } from '../tyoes/data-entry-sort';
-import { DataEntrySortDirection } from '../tyoes/data-entry-sort-direction';
+import { DataEntrySort } from '../shared/data-entry-sort';
+import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
 
 @Component({
     selector: 'app-entry-list',

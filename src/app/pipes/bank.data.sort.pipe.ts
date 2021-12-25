@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { BankDataEntry } from '../shared/bank-data-entry';
-import { DataEntrySort } from '../tyoes/data-entry-sort';
-import { DataEntrySortDirection } from '../tyoes/data-entry-sort-direction';
+import { DataEntrySort } from '../shared/data-entry-sort';
+import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
 
 @Pipe({ name: 'bankDataSort' })
 export class BankDataSortPipe implements PipeTransform {
