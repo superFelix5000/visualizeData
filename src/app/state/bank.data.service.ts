@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgxCsvParser } from 'ngx-csv-parser';
+import { Observable } from 'rxjs';
 import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
 import { SimpleDate } from '../shared/simple-date';
 import { BankDataStore } from './bank.data.store';
 
 @Injectable({ providedIn: 'root' })
 export class BankDataService {
+    private readonly baseUrl = 'http://localhost:8000';
+
     constructor(
         private bankDataStore: BankDataStore,
         private http: HttpClient,
@@ -15,6 +18,7 @@ export class BankDataService {
 
     init(): void {
         this.reloadData();
+        // this.downloadAll().subscribe(object => console.log(JSON.stringify(object)));
     }
 
     setYear(year: number): void {
@@ -24,15 +28,21 @@ export class BankDataService {
     reloadData(): void {
         this.bankDataStore.remove();
         this.bankDataStore.reset();
-        this.loadDataFromLocalFile('all.txt');
+        this.loadDataFromLocalFile('all.txt').subscribe(data => {
+            this.bankDataStore.add(this.readBankDataEntriesFromData(data));
+        })        
     }
 
-    private loadDataFromLocalFile(file: string): void {
-        this.http
-            .get('assets/' + file, { responseType: 'text' })
-            .subscribe((data) => {                
-                this.bankDataStore.add(this.readBankDataEntriesFromData(data));
-            });
+    private loadDataFromLocalFile(file: string): Observable<string> {
+        return this.http.get('assets/' + file, { responseType: 'text' });            
+    }
+
+    uploadAll(entries: BankDataEntry[]): Observable<Object> {
+        return this.http.post(this.baseUrl + '/api/v1/saveAll', entries);
+    }
+
+    downloadAll(): Observable<Object> {
+        return this.http.get(this.baseUrl + 'api/v1/fetchAll');
     }
 
     readBankDataEntriesFromData(data: string): BankDataEntry[] {
@@ -75,6 +85,5 @@ export class BankDataService {
         const year = parseInt(stringDate.substring(6, 10));
         return new SimpleDate(day, month, year);
     }
-
     
 }

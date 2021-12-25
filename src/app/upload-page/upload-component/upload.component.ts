@@ -21,4 +21,8 @@ export class UploadComponent {
         });
     }
 
+    onUpload() {
+        this.bankDataService.uploadAll(this.entries).subscribe(result => console.log(result));
+    }
+
 }

@@ -37,7 +37,6 @@ export class VisualizationComponent implements OnInit {
     }
 
     config: zingchart.graphset = {
-        title: { text: 'jee' },
         type: 'bar',
         plot: {
             'border-radius': '5px',
@@ -45,6 +44,7 @@ export class VisualizationComponent implements OnInit {
                 text: '%stack-total',
                 // backgroundColor: 'black',
                 decimals: 0,
+                fontSize: "20px"
             },
         },
         'scale-x': {
