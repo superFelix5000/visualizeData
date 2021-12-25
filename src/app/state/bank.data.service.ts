@@ -6,6 +6,10 @@ import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
 import { SimpleDate } from '../shared/simple-date';
 import { BankDataStore } from './bank.data.store';
 
+type ServerData = {
+    success: boolean;
+    data: BankDataEntry[];
+};
 @Injectable({ providedIn: 'root' })
 export class BankDataService {
     private readonly baseUrl = 'http://localhost:8000';
@@ -17,7 +21,7 @@ export class BankDataService {
     ) {}
 
     init(): void {
-        this.reloadData();        
+        this.reloadData();
     }
 
     setYear(year: number): void {
@@ -27,29 +31,29 @@ export class BankDataService {
     reloadData(): void {
         this.bankDataStore.remove();
         this.bankDataStore.reset();
-        this.downloadAll().subscribe((data:any) => {
+        this.downloadAll().subscribe((data: ServerData) => {
             this.bankDataStore.add(data.data);
+            // this.loadDataFromLocalFile('all.txt').subscribe((text) => {
+            //     this.bankDataStore.add(this.readBankDataEntriesFromData(text));
+            // });
         });
     }
 
     private loadDataFromLocalFile(file: string): Observable<string> {
-        return this.http.get('assets/' + file, { responseType: 'text' });            
+        return this.http.get('assets/' + file, { responseType: 'text' });
     }
 
     uploadAll(entries: BankDataEntry[]): Observable<Object> {
         return this.http.post(this.baseUrl + '/api/v1/saveAll', entries);
     }
 
-    downloadAll(): Observable<Object> {
-        return this.http.get(this.baseUrl + '/api/v1/fetchAll');
+    downloadAll(): Observable<ServerData> {
+        return this.http.get<ServerData>(this.baseUrl + '/api/v1/fetchAll');
     }
 
     readBankDataEntriesFromData(data: string): BankDataEntry[] {
         const bankDataEntries: BankDataEntry[] = [];
-        const entries: any[][] = this.ngxCsvParser.csvStringToArray(
-            data,
-            '\t'
-        );
+        const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
         entries
             .filter((entry) => entry.length > 3)
             .forEach((entry) => {
@@ -84,5 +88,4 @@ export class BankDataService {
         const year = parseInt(stringDate.substring(6, 10));
         return new SimpleDate(day, month, year);
     }
-    
 }

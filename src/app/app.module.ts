@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { BankDataSortPipe } from './pipes/bank.data.sort.pipe';
 import { UploadComponent } from './upload-page/upload-component/upload.component';
 import { EntryListComponent } from './entry-list/entry-list.component';
+import { PrintSimpleDatePipe } from './pipes/print.simple.date.pipe';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { EntryListComponent } from './entry-list/entry-list.component';
         EntryListComponent,
         EntryListPageComponent,
         BankDataSortPipe,
+        PrintSimpleDatePipe,
         UploadComponent,
     ],
     imports: [

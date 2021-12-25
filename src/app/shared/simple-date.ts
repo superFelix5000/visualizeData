@@ -9,13 +9,4 @@ export class SimpleDate {
         this.year = year;
     }
 
-    toString(): string {
-        return (
-            this.day.toString() +
-            '.' +
-            this.month.toString() +
-            '.' +
-            this.year.toString()
-        );
-    }
 }
