@@ -17,8 +17,7 @@ export class BankDataService {
     ) {}
 
     init(): void {
-        this.reloadData();
-        // this.downloadAll().subscribe(object => console.log(JSON.stringify(object)));
+        this.reloadData();        
     }
 
     setYear(year: number): void {
@@ -28,9 +27,9 @@ export class BankDataService {
     reloadData(): void {
         this.bankDataStore.remove();
         this.bankDataStore.reset();
-        this.loadDataFromLocalFile('all.txt').subscribe(data => {
-            this.bankDataStore.add(this.readBankDataEntriesFromData(data));
-        })        
+        this.downloadAll().subscribe((data:any) => {
+            this.bankDataStore.add(data.data);
+        });
     }
 
     private loadDataFromLocalFile(file: string): Observable<string> {
@@ -42,7 +41,7 @@ export class BankDataService {
     }
 
     downloadAll(): Observable<Object> {
-        return this.http.get(this.baseUrl + 'api/v1/fetchAll');
+        return this.http.get(this.baseUrl + '/api/v1/fetchAll');
     }
 
     readBankDataEntriesFromData(data: string): BankDataEntry[] {
