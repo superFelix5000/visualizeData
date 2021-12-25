@@ -1,2 +1,2 @@
-<p>upload-component works!</p>
 <input type="file" (input)="onFileInput($event)">
+<app-entry-list *ngIf="entries.length > 0" [entries]="entries"></app-entry-list>
