@@ -1,1 +1,6 @@
-<app-entry-list [entries]="entries$ | async"></app-entry-list>
+<app-entry-list [entries]="entries$ | async" (entryChanged)="onEntryChanged($event)"></app-entry-list>
+<button class="bg-blue-400 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+    (click)="onUpload()"
+    *ngIf="entriesChanged">
+    Upload
+</button>

@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { Sort } from '@angular/material/sort';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
-import { BankDataService } from 'src/app/state/bank.data.service';
 import { DataEntrySort } from '../shared/data-entry-sort';
 import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
 
@@ -16,6 +15,7 @@ import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
 export class EntryListComponent {
 
     @Input() entries: BankDataEntry[];
+    @Output() entryChanged: EventEmitter<BankDataEntry> = new EventEmitter<BankDataEntry>();
 
     columnsToDisplay = [
         'date',
@@ -31,10 +31,6 @@ export class EntryListComponent {
     sort: DataEntrySort;
     sortDirection: DataEntrySortDirection;
     categoryType = Category;
-
-    constructor(
-        private bankDataService: BankDataService
-    ) {}    
 
     updatePageData(event: PageEvent): void {
         this.size = event.pageSize;
@@ -54,8 +50,10 @@ export class EntryListComponent {
         entry: BankDataEntry,
         event: MatSelectChange
     ): void {
-        this.bankDataService.updateEntry(entry.id, {
-            category: Category[event.value],
-        });
-    }
+        const changedEntry: BankDataEntry = {
+            ...entry,
+            category: event.value
+        };
+        this.entryChanged.emit(changedEntry);
+    }        
 }
