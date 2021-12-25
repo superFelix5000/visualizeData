@@ -39,6 +39,14 @@ export class VisualizationComponent implements OnInit {
     config: zingchart.graphset = {
         title: { text: 'jee' },
         type: 'bar',
+        plot: {
+            'border-radius': '5px',
+            valueBox: {
+                text: '%stack-total',
+                // backgroundColor: 'black',
+                decimals: 0,
+            },
+        },
         'scale-x': {
             label: { text: 'Months' },
             values: [
