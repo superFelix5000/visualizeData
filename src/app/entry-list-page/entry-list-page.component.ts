@@ -7,18 +7,8 @@ import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
-
-export enum DataEntrySort {
-    date = 'date',
-    recipient = 'recipient',
-    amount = 'amount',
-}
-
-export enum DataEntrySortDirection {
-    NONE = '',
-    asc = 'asc',
-    desc = 'desc',
-}
+import { DataEntrySort } from '../tyoes/data-entry-sort';
+import { DataEntrySortDirection } from '../tyoes/data-entry-sort-direction';
 
 @Component({
     selector: 'app-entry-list-page',
