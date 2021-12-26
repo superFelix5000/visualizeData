@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 
 @Component({
@@ -10,7 +11,7 @@ import { BankDataQuery } from 'src/app/state/bank.data.query';
 export class PieChartComponent implements OnInit {
     series$: Observable<zingchart.series[]>;
     myConfig: zingchart.graphset = {
-        type: "pie",
+        type: 'pie',
         plot: {
           valueBox: {
             placement: 'out',
@@ -23,69 +24,45 @@ export class PieChartComponent implements OnInit {
             padding: "5 10",
             text: "%npv%"
           }
-        },
-        series: [{
-            values: [11.38],
-            text: "Internet Explorer",
-            backgroundColor: '#50ADF5',
-          },
-          {
-            values: [56.94],
-            text: "Chrome",
-            backgroundColor: '#FF7965',
-          },
-          {
-            values: [14.52],
-            text: 'Firefox',
-            backgroundColor: '#FFCB45',
-          },
-          {
-            text: 'Safari',
-            values: [9.69],
-            backgroundColor: '#6877e5'
-          },
-          {
-            text: 'Other',
-            values: [7.48],
-            backgroundColor: '#6FB07F'
-          }
-        ]
-      };
-    testSeries: [
-        {
-            values: [11.38];
-            text: 'Internet Explorer';
-            backgroundColor: '#50ADF5';
-        },
-        {
-            values: [56.94];
-            text: 'Chrome';
-            backgroundColor: '#FF7965';
-        },
-        {
-            values: [14.52];
-            text: 'Firefox';
-            backgroundColor: '#FFCB45';
-        },
-        {
-            text: 'Safari';
-            values: [9.69];
-            backgroundColor: '#6877e5';
-        },
-        {
-            text: 'Other';
-            values: [7.48];
-            backgroundColor: '#6FB07F';
         }
-    ];
+      };
+      /*
+      series = [{
+        values: [11.38],
+        text: "Internet Explorer",
+        backgroundColor: '#50ADF5',
+      },
+      {
+        values: [56.94],
+        text: "Chrome",
+        backgroundColor: '#FF7965',
+      },
+      {
+        values: [14.52],
+        text: 'Firefox',
+        backgroundColor: '#FFCB45',
+      },
+      {
+        text: 'Safari',
+        values: [9.69],
+        backgroundColor: '#6877e5'
+      },
+      {
+        text: 'Other',
+        values: [7.48],
+        backgroundColor: '#6FB07F'
+      }
+    ];*/
 
     constructor(private bankDataQuery: BankDataQuery) {}
 
     ngOnInit(): void {
-        this.bankDataQuery.selectAllCategoriesPerSelectedYear$.subscribe(
-            (foo) => {
-                console.log(foo);
-            }
-        );
+        this.series$ = this.bankDataQuery.selectAllCategoriesPerSelectedYear$.pipe(
+            map(values => values.map(categoryPercentage => {
+                return {
+                    values: [categoryPercentage.percentage],
+                    text: categoryPercentage.category.toString()
+                }
+            })));
     }
 }

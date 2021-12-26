@@ -12,8 +12,10 @@ import { BankDataService } from 'src/app/state/bank.data.service';
 })
 export class VisualizationComponent implements OnInit {
     years = YEARS;
+    
     // TODO: not used atm
     selectedYear$: Observable<number>;
+
     yearBalances$: Observable<number[]> = of([]);
     series$: Observable<zingchart.series[]>;
     config: zingchart.graphset = {
@@ -22,13 +24,11 @@ export class VisualizationComponent implements OnInit {
             'border-radius': '5px',
             valueBox: {
                 text: '%stack-total',
-                // backgroundColor: 'black',
                 decimals: 0,
                 fontSize: "20px"
             },
         },
         'scale-x': {
-            label: { text: 'Months' },
             values: [
                 'January',
                 'Feb',
@@ -64,8 +64,6 @@ export class VisualizationComponent implements OnInit {
     onYearSelectionChange(year: number): void {
         this.bankDataService.setYear(year);
     }
-
-    
 
     reloadData(): void {
         this.bankDataService.reloadData();

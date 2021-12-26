@@ -1,5 +1,5 @@
 <zingchart-angular
-    [series]="testSeries"  
     [config]="myConfig"
     [height]="500"
+    [series]="series$ | async"
 ></zingchart-angular>

@@ -67,6 +67,7 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
             map(entries => entries.reduce((a,b) => a + b.amount, 0))
         );
 
+    // TODO: refactor this - now this is getting called multiple times because of calculation logic
     /**
      * @returns all the categories for the selected year and their percentage of the total amount to pay
      */
