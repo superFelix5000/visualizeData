@@ -10,4 +10,5 @@ export enum Category {
     CLOTHING = 'CLOTHING',
     INSURANCES = 'INSURANCES',
     ENTERTAINMENT = 'ENTERTAINMENT',
+    HOME = 'HOME'
 }
