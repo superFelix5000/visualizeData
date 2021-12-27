@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, mergeMap, take, tap } from 'rxjs/operators';
+import { mergeMap, take } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from '../state/bank.data.service';
