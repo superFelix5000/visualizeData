@@ -23,6 +23,7 @@ import { UploadComponent } from './upload-page/upload-component/upload.component
 import { EntryListComponent } from './entry-list/entry-list.component';
 import { PrintSimpleDatePipe } from './pipes/print.simple.date.pipe';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
+import { EntryCategoryListComponent } from './entry-category-list/entry-category-list.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
         VisualizationComponent,
         LandingPageComponent,
         EntryListComponent,
+        EntryCategoryListComponent,
         EntryListPageComponent,
         BankDataSortPipe,
         PrintSimpleDatePipe,
