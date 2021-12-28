@@ -7,6 +7,7 @@ import { filter, map } from 'rxjs/operators';
 import { YEARS } from '../shared/constants';
 import { CategoryPercentage } from '../shared/category-percentage';
 import { Category } from '../shared/categories';
+import { RecipientCategory } from '../shared/recipient-category';
 
 @Injectable({
     providedIn: 'root',
@@ -18,6 +19,10 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
 
     selectCurrentYear$: Observable<number> = this.select(
         (state) => state.selectedYear
+    );
+
+    selectRecipientCategories$: Observable<RecipientCategory[]> = this.select(
+        (state) => state.recipientCategories
     );
 
     /**
@@ -74,8 +79,7 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
      selectAllCategoriesPerSelectedYear$: Observable<CategoryPercentage[]> = combineLatest([
         this.selectTotalPaymentAmountForSelectedYear$,
         this.selectAllEntriesPerSelectedYear$
-     ])
-        .pipe(
+     ]).pipe(
             map(([totalYearAmount, yearEntries]) => this.getCategoryValues(yearEntries, totalYearAmount)
         ));
 

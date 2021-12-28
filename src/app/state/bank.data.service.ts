@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgxCsvParser } from 'ngx-csv-parser';
 import { Observable } from 'rxjs';
 import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
+import { RecipientCategory } from '../shared/recipient-category';
 import { ServerData } from '../shared/server-data';
 import { SimpleDate } from '../shared/simple-date';
 import { BankDataStore } from './bank.data.store';
@@ -25,16 +26,17 @@ export class BankDataService {
         this.bankDataStore.update((state) => ({ selectedYear: year }));
     }
 
+    setRecipientCategories(entries: RecipientCategory[]) {
+        this.bankDataStore.update((state) => ({recipientCategories: entries}));
+    }
+
     reloadData(): void {
         this.bankDataStore.remove();
         this.bankDataStore.reset();
         this.downloadAll().subscribe((data: ServerData) => {
             this.bankDataStore.add(data.data);
         });
-    }
-
-    private loadDataFromLocalFile(file: string): Observable<string> {
-        return this.http.get('assets/' + file, { responseType: 'text' });
+        // TODO: download recipient categories from server and push them to the store
     }
 
     uploadAll(entries: BankDataEntry[]): Observable<Object> {
