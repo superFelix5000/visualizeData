@@ -1,5 +1,5 @@
 <mat-paginator
-    [length]="entries?.length"
+    [length]="entries.length"
     [pageSize]="size"
     [pageSizeOptions]="[5, 10, 25, 100]"
     (page)="updatePageData($event)"
@@ -11,7 +11,7 @@
     class="table"
     matSort
     mat-table
-    [dataSource]="entries | slice: start:end"
+    [dataSource]="entries | recipientCategorySort | slice: start:end"
 >
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
@@ -38,10 +38,12 @@
     </ng-container>
 </table>
 <div class="flex justify-around p-10">
-    <button class="bg-blue-400 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <button [disabled]="!entryChanged" class="bg-blue-400 disabled:bg-gray-500 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        (click)="onSave()">
         Upload
     </button>
-    <button class="bg-blue-400 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <button class="bg-blue-400 disabled:bg-gray-500 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        (click)="onMerge()">
         Merge existing entries
     </button>
 </div>

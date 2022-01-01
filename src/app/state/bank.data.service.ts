@@ -4,7 +4,7 @@ import { NgxCsvParser } from 'ngx-csv-parser';
 import { Observable } from 'rxjs';
 import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
 import { RecipientCategory } from '../shared/recipient-category';
-import { ServerData } from '../shared/server-data';
+import { BankDataFetchServerData, CategoryMapFetchServerData } from '../shared/server-data';
 import { SimpleDate } from '../shared/simple-date';
 import { BankDataStore } from './bank.data.store';
 
@@ -33,18 +33,28 @@ export class BankDataService {
     reloadData(): void {
         this.bankDataStore.remove();
         this.bankDataStore.reset();
-        this.downloadAll().subscribe((data: ServerData) => {
+        this.downloadAll().subscribe((data: BankDataFetchServerData) => {
             this.bankDataStore.add(data.data);
         });
-        // TODO: download recipient categories from server and push them to the store
+        this.downloadRecipientCategories().subscribe((data: CategoryMapFetchServerData) => {
+            this.setRecipientCategories(data.data);
+        });        
     }
 
     uploadAll(entries: BankDataEntry[]): Observable<Object> {
         return this.http.post(this.baseUrl + '/api/v1/saveAll', entries);
     }
 
-    downloadAll(): Observable<ServerData> {
-        return this.http.get<ServerData>(this.baseUrl + '/api/v1/fetchAll');
+    downloadAll(): Observable<BankDataFetchServerData> {
+        return this.http.get<BankDataFetchServerData>(this.baseUrl + '/api/v1/fetchAll');
+    }
+
+    uploadRecipientCategories(entries: RecipientCategory[]): Observable<Object> {
+        return this.http.post(this.baseUrl + '/api/v1/saveCategoryMap', entries);
+    }
+
+    downloadRecipientCategories(): Observable<CategoryMapFetchServerData> {
+        return this.http.get<CategoryMapFetchServerData>(this.baseUrl + '/api/v1/fetchCategoryMap');
     }
 
     readBankDataEntriesFromData(data: string): BankDataEntry[] {

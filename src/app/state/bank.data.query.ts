@@ -3,7 +3,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { BankDataState, BankDataStore } from './bank.data.store';
 import { Injectable } from '@angular/core';
 import { BankDataEntry } from '../shared/bank-data-entry';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { YEARS } from '../shared/constants';
 import { CategoryPercentage } from '../shared/category-percentage';
 import { Category } from '../shared/categories';

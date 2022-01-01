@@ -5,11 +5,11 @@
     </div>
     <div class="rounded-lg shadow-xl p-5">
         <p class="text-2xl text-slate-600">Category map</p>
-        <app-entry-category-list [entries]="testRecipientCategories"></app-entry-category-list>
+        <app-entry-category-list></app-entry-category-list>
     </div>
 </div>
-<button class="bg-blue-400 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+<button class="bg-blue-400 disabled:bg-gray-500 active:bg-blue-900 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
     (click)="onUpload()"
-    *ngIf="entriesChanged">
+    [disabled]="!entriesChanged">
     Upload
 </button>

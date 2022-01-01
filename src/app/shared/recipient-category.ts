@@ -1,6 +1,6 @@
 import { Category } from "./categories";
 
-export type RecipientCategory = {
-    recipient: string,
-    category: Category
+export class RecipientCategory {
+    recipient: string;
+    category: Category;
 };

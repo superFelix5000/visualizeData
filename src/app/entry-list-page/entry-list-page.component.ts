@@ -14,17 +14,7 @@ import { BankDataService } from '../state/bank.data.service';
 })
 export class EntryListPageComponent implements OnInit {
     entries$: Observable<BankDataEntry[]>;
-    entriesChanged: boolean = false;
-    testRecipientCategories: RecipientCategory[] = [
-        {
-            recipient: 'asd',
-            category: Category.ENTERTAINMENT
-        },
-        {
-            recipient: 'foo',
-            category: Category.FOOD
-        }
-    ]
+    entriesChanged: boolean = false;    
 
     constructor(private bankDataQuery: BankDataQuery,
         private bankDataService: BankDataService) {}
