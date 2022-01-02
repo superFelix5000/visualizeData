@@ -71,6 +71,6 @@ export class VisualizationComponent implements OnInit {
 
     // TODO: bubble event or send to store selected month and react to that
     nodeClicked(ev): void {
-        console.log(ev);
+        this.bankDataService.setMonth(ev.nodeindex + 1);
     }
 }

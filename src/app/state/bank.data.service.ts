@@ -26,6 +26,10 @@ export class BankDataService {
         this.bankDataStore.update((state) => ({ selectedYear: year }));
     }
 
+    setMonth(month: number): void {
+        this.bankDataStore.update((state) => ({ selectedMonth: month }));
+    }
+
     setRecipientCategories(entries: RecipientCategory[]) {
         this.bankDataStore.update((state) => ({recipientCategories: entries}));
     }

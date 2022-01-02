@@ -21,6 +21,10 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         (state) => state.selectedYear
     );
 
+    selectCurrentMonth$: Observable<number> = this.select(
+        (state) => state.selectedMonth
+    );
+
     selectRecipientCategories$: Observable<RecipientCategory[]> = this.select(
         (state) => state.recipientCategories
     );

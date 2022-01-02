@@ -6,12 +6,14 @@ import { RecipientCategory } from '../shared/recipient-category';
 
 export interface BankDataState extends EntityState<BankDataEntry, string> {
     selectedYear: number;
+    selectedMonth: number;
     recipientCategories: RecipientCategory[]
 }
 
 const initialState: BankDataState = {
     selectedYear: YEARS[YEARS.length - 1],
-    recipientCategories: []
+    recipientCategories: [],
+    selectedMonth: null
 };
 
 @Injectable({
