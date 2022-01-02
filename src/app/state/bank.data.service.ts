@@ -45,6 +45,10 @@ export class BankDataService {
         return this.http.post(this.baseUrl + '/api/v1/saveAll', entries);
     }
 
+    appendAll(entries: BankDataEntry[]): Observable<Object> {
+        return this.http.post(this.baseUrl + '/api/v1/appendAll', entries);
+    }
+
     downloadAll(): Observable<BankDataFetchServerData> {
         return this.http.get<BankDataFetchServerData>(this.baseUrl + '/api/v1/fetchAll');
     }

@@ -26,13 +26,18 @@
         </button>
     </div>
 
-    <div class="rounded-lg shadow-xl">
-        <zingchart-angular
-            (node_click)="nodeClicked($event)"
-            [config]="config"
-            [series]="series$ | async"
-            [height]="500"
-        ></zingchart-angular>
+    <div class="flex flex-row justify-around space-x-10">
+        <div class="rounded-lg shadow-xl flex-grow w-1/2 p-5">
+            <zingchart-angular
+                (node_click)="nodeClicked($event)"
+                [config]="config"
+                [series]="series$ | async"
+                [height]="500"
+            ></zingchart-angular>        
+        </div>
+        <div class="rounded-lg shadow-xl w-1/2 p-5">
+            <app-pie-chart></app-pie-chart>
+        </div>
     </div>
-    <app-pie-chart></app-pie-chart>
+    
 </div>

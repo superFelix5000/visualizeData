@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CategoryColorMap } from 'src/app/shared/category-colors';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 
 @Component({
@@ -16,52 +17,28 @@ export class PieChartComponent implements OnInit {
           valueBox: {
             placement: 'out',
             text: '%t\n%npv%',
-            fontFamily: "Open Sans"
+            fontFamily: "Roboto"
           },
           tooltip: {
             fontSize: '18',
-            fontFamily: "Open Sans",
+            fontFamily: "Roboto",
             padding: "5 10",
-            text: "%npv%"
+            text: "%t\n%npv%\n%v",
+            decimals: 2
           }
         }
-      };
-      /*
-      series = [{
-        values: [11.38],
-        text: "Internet Explorer",
-        backgroundColor: '#50ADF5',
-      },
-      {
-        values: [56.94],
-        text: "Chrome",
-        backgroundColor: '#FF7965',
-      },
-      {
-        values: [14.52],
-        text: 'Firefox',
-        backgroundColor: '#FFCB45',
-      },
-      {
-        text: 'Safari',
-        values: [9.69],
-        backgroundColor: '#6877e5'
-      },
-      {
-        text: 'Other',
-        values: [7.48],
-        backgroundColor: '#6FB07F'
-      }
-    ];*/
+      };      
 
     constructor(private bankDataQuery: BankDataQuery) {}
 
     ngOnInit(): void {
         this.series$ = this.bankDataQuery.selectAllCategoriesPerSelectedYear$.pipe(
+            map(values => values.sort((a,b) => a.category.toString().localeCompare(b.category.toString()))),
             map(values => values.map(categoryPercentage => {
                 return {
-                    values: [categoryPercentage.percentage],
-                    text: categoryPercentage.category.toString()
+                    values: [categoryPercentage.totalValue],
+                    text: categoryPercentage.category.toString(),
+                    backgroundColor: CategoryColorMap.get(categoryPercentage.category)
                 }
             })));
     }

@@ -21,8 +21,10 @@ export class UploadComponent {
         });
     }
 
+    // TODO! add functionality here to be able to change the category on the new entries already
+
     onUpload() {
-        this.bankDataService.uploadAll(this.entries).subscribe();
+        this.bankDataService.appendAll(this.entries).subscribe();
     }
 
 }

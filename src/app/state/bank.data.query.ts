@@ -109,7 +109,11 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
                 .filter(entry => entry.category === category)
                 .reduce((a, b) => a + Math.abs(b.amount), 0);
             if (totalCategoryAmount > 0) {
-                categoryPercentages.push({category, percentage: totalCategoryAmount / Math.abs(totalYearAmount)});
+                categoryPercentages.push({
+                    category, 
+                    percentage: totalCategoryAmount / Math.abs(totalYearAmount),
+                    totalValue: totalCategoryAmount
+                });
             }            
         }
         return categoryPercentages;
