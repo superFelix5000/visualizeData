@@ -63,13 +63,14 @@ export class VisualizationComponent implements OnInit {
 
     onYearSelectionChange(year: number): void {
         this.bankDataService.setYear(year);
+        this.bankDataService.setMonth(null);
     }
 
     reloadData(): void {
         this.bankDataService.reloadData();
     }
 
-    // TODO: bubble event or send to store selected month and react to that
+    // TODO: type for ev
     nodeClicked(ev): void {
         this.bankDataService.setMonth(ev.nodeindex + 1);
     }

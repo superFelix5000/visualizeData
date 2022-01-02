@@ -62,7 +62,7 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
 
     selectAllEntriesWithMatchedCategories$: Observable<BankDataEntry[]> = combineLatest([
         this.selectAll(),
-        this.selectRecipientCategories$
+        this.selectRecipientCategories$,
     ]).pipe(map(([entries, recipentCategories]) => {
         let rcMap: Map<string, Category> = new Map<string, Category>();
         recipentCategories.forEach(rc => rcMap.set(rc.recipient, rc.category));
@@ -97,18 +97,20 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
     /**
      * @returns all the categories for the selected year and their percentage of the total amount to pay
      */
-     selectAllCategoriesPerSelectedYear$: Observable<CategoryPercentage[]> = combineLatest([
+     selectAllCategoriesPerSelectedYearAndMonth$: Observable<CategoryPercentage[]> = combineLatest([
         this.selectTotalPaymentAmountForSelectedYear$,
-        this.selectAllEntriesPerSelectedYear$
+        this.selectAllEntriesPerSelectedYear$,
+        this.selectCurrentMonth$
      ]).pipe(
-            map(([totalYearAmount, yearEntries]) => this.getCategoryValues(yearEntries, totalYearAmount)
+            map(([totalYearAmount, yearEntries, month]) => this.getCategoryValues(yearEntries, totalYearAmount, month)
         ));
 
-    private getCategoryValues(entries: BankDataEntry[], totalYearAmount: number): CategoryPercentage[] {        
+    private getCategoryValues(entries: BankDataEntry[], totalYearAmount: number, currentMonth: number): CategoryPercentage[] {        
         let categoryPercentages:CategoryPercentage[] = [];
         for (const cat in Category) {
             const category = Category[cat];
             const totalCategoryAmount = entries
+                .filter(entry => currentMonth != null ? entry.paymentDate.month === currentMonth : true)
                 .filter(entry => entry.amount < 0)
                 .filter(entry => entry.category === category)
                 .reduce((a, b) => a + Math.abs(b.amount), 0);

@@ -32,7 +32,7 @@ export class PieChartComponent implements OnInit {
     constructor(private bankDataQuery: BankDataQuery) {}
 
     ngOnInit(): void {
-        this.series$ = this.bankDataQuery.selectAllCategoriesPerSelectedYear$.pipe(
+        this.series$ = this.bankDataQuery.selectAllCategoriesPerSelectedYearAndMonth$.pipe(
             map(values => values.sort((a,b) => a.category.toString().localeCompare(b.category.toString()))),
             map(values => values.map(categoryPercentage => {
                 return {
