@@ -25,6 +25,10 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         (state) => state.selectedMonth
     );
 
+    selectCurrentCategory$: Observable<Category> = this.select(
+        (state) => state.selectedCategory
+    );
+
     selectRecipientCategories$: Observable<RecipientCategory[]> = this.select(
         (state) => state.recipientCategories
     );
@@ -87,6 +91,15 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
             .filter(entry => month != null ? entry.paymentDate.month === month : true)
         )
     );
+
+    selectAllEntriesPerSelectedYearAndMonthAndCategory$: Observable<BankDataEntry[]> = combineLatest([
+        this.selectAllEntriesPerSelectedYearAndMonth$,
+        this.selectCurrentCategory$
+    ]).pipe(
+        map(([entries, category]) => entries
+            .filter(entry => category != null ? entry.category === category : true)
+        )
+    );   
 
     /**
      * @returns the total amount for the selected year that I payed

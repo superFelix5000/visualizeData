@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgxCsvParser } from 'ngx-csv-parser';
 import { Observable } from 'rxjs';
 import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
+import { Category } from '../shared/categories';
 import { RecipientCategory } from '../shared/recipient-category';
 import { BankDataFetchServerData, CategoryMapFetchServerData } from '../shared/server-data';
 import { SimpleDate } from '../shared/simple-date';
@@ -28,6 +29,10 @@ export class BankDataService {
 
     setMonth(month: number): void {
         this.bankDataStore.update((state) => ({ selectedMonth: month }));
+    }
+
+    setCategory(category: Category): void {
+        this.bankDataStore.update((state) => ({ selectedCategory: category }));
     }
 
     setRecipientCategories(entries: RecipientCategory[]) {

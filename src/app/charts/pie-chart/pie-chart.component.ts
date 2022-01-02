@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { CategoryColorMap } from 'src/app/shared/category-colors';
+import { CategoryPercentage } from 'src/app/shared/category-percentage';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
+import { BankDataService } from 'src/app/state/bank.data.service';
 
 @Component({
     selector: 'app-pie-chart',
@@ -11,9 +13,10 @@ import { BankDataQuery } from 'src/app/state/bank.data.query';
 })
 export class PieChartComponent implements OnInit {
     series$: Observable<zingchart.series[]>;
+    private categoryPercentages: CategoryPercentage[];
     myConfig: zingchart.graphset = {
-        type: 'pie',
-        plot: {
+        type: 'pie',        
+        plot: {            
           valueBox: {
             placement: 'out',
             text: '%t\n%npv%',
@@ -29,11 +32,13 @@ export class PieChartComponent implements OnInit {
         }
       };      
 
-    constructor(private bankDataQuery: BankDataQuery) {}
+    constructor(private bankDataQuery: BankDataQuery,
+                private bankDataService: BankDataService) {}
 
     ngOnInit(): void {
         this.series$ = this.bankDataQuery.selectAllCategoriesPerSelectedYearAndMonth$.pipe(
             map(values => values.sort((a,b) => a.category.toString().localeCompare(b.category.toString()))),
+            tap(values => this.categoryPercentages = values),
             map(values => values.map(categoryPercentage => {
                 return {
                     values: [categoryPercentage.totalValue],
@@ -41,5 +46,10 @@ export class PieChartComponent implements OnInit {
                     backgroundColor: CategoryColorMap.get(categoryPercentage.category)
                 }
             })));
+    }
+
+    // TODO: add type for event?
+    nodeClicked(ev) {
+        this.bankDataService.setCategory(this.categoryPercentages[ev.plotindex].category);
     }
 }

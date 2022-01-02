@@ -61,12 +61,13 @@ export class VisualizationComponent implements OnInit {
         this.valuesPerMonth$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
             map((values) => [{ values: values }])
         );
-        this.filteredBankDataEntries$ = this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonth$;
+        this.filteredBankDataEntries$ = this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonthAndCategory$;
     }
 
     onYearSelectionChange(year: number): void {
         this.bankDataService.setYear(year);
         this.bankDataService.setMonth(null);
+        this.bankDataService.setCategory(null);
     }
 
     reloadData(): void {
@@ -76,5 +77,6 @@ export class VisualizationComponent implements OnInit {
     // TODO: type for ev
     nodeClicked(ev): void {
         this.bankDataService.setMonth(ev.nodeindex + 1);
+        this.bankDataService.setCategory(null);
     }
 }
