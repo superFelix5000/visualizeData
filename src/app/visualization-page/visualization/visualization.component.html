@@ -31,7 +31,7 @@
             <zingchart-angular
                 (node_click)="nodeClicked($event)"
                 [config]="config"
-                [series]="series$ | async"
+                [series]="valuesPerMonth$ | async"
                 [height]="500"
             ></zingchart-angular>        
         </div>
@@ -39,5 +39,6 @@
             <app-pie-chart></app-pie-chart>
         </div>
     </div>
-    
+
+    <app-entry-list [entries]="filteredBankDataEntries$ | async"></app-entry-list>
 </div>

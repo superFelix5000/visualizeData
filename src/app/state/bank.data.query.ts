@@ -77,18 +77,22 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         });
     }));
 
-    selectAllEntriesPerSelectedYear$: Observable<BankDataEntry[]> = combineLatest([
+    selectAllEntriesPerSelectedYearAndMonth$: Observable<BankDataEntry[]> = combineLatest([
         this.selectAllEntriesWithMatchedCategories$,
         this.selectCurrentYear$,
+        this.selectCurrentMonth$
     ]).pipe(
-        map(([entries, year]) => entries.filter(entry => entry.paymentDate.year === year))
+        map(([entries, year, month]) => entries
+            .filter(entry => entry.paymentDate.year === year)
+            .filter(entry => month != null ? entry.paymentDate.month === month : true)
+        )
     );
 
     /**
      * @returns the total amount for the selected year that I payed
      */
     selectTotalPaymentAmountForSelectedYear$: Observable<number> = 
-        this.selectAllEntriesPerSelectedYear$.pipe(
+        this.selectAllEntriesPerSelectedYearAndMonth$.pipe(
             map(entries => entries.filter(entry => entry.amount < 0)),
             map(entries => entries.reduce((a,b) => a + b.amount, 0))
         );
@@ -99,18 +103,16 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
      */
      selectAllCategoriesPerSelectedYearAndMonth$: Observable<CategoryPercentage[]> = combineLatest([
         this.selectTotalPaymentAmountForSelectedYear$,
-        this.selectAllEntriesPerSelectedYear$,
-        this.selectCurrentMonth$
+        this.selectAllEntriesPerSelectedYearAndMonth$
      ]).pipe(
-            map(([totalYearAmount, yearEntries, month]) => this.getCategoryValues(yearEntries, totalYearAmount, month)
+            map(([totalYearAmount, yearEntries]) => this.getCategoryValues(yearEntries, totalYearAmount)
         ));
 
-    private getCategoryValues(entries: BankDataEntry[], totalYearAmount: number, currentMonth: number): CategoryPercentage[] {        
+    private getCategoryValues(entries: BankDataEntry[], totalYearAmount: number): CategoryPercentage[] {        
         let categoryPercentages:CategoryPercentage[] = [];
         for (const cat in Category) {
             const category = Category[cat];
-            const totalCategoryAmount = entries
-                .filter(entry => currentMonth != null ? entry.paymentDate.month === currentMonth : true)
+            const totalCategoryAmount = entries            
                 .filter(entry => entry.amount < 0)
                 .filter(entry => entry.category === category)
                 .reduce((a, b) => a + Math.abs(b.amount), 0);

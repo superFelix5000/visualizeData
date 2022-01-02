@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { YEARS } from 'src/app/shared/constants';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
@@ -17,7 +18,8 @@ export class VisualizationComponent implements OnInit {
     selectedYear$: Observable<number>;
 
     yearBalances$: Observable<number[]> = of([]);
-    series$: Observable<zingchart.series[]>;
+    valuesPerMonth$: Observable<zingchart.series[]>;
+    filteredBankDataEntries$: Observable<BankDataEntry[]>;
     config: zingchart.graphset = {
         type: 'bar',
         plot: {
@@ -56,9 +58,10 @@ export class VisualizationComponent implements OnInit {
 
         this.yearBalances$ = this.bankDataQuery.selectYearBalances$;
         this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
-        this.series$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
+        this.valuesPerMonth$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
             map((values) => [{ values: values }])
         );
+        this.filteredBankDataEntries$ = this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonth$;
     }
 
     onYearSelectionChange(year: number): void {
