@@ -13,29 +13,11 @@ import { BankDataService } from '../state/bank.data.service';
     styleUrls: ['./entry-list-page.component.scss'],
 })
 export class EntryListPageComponent implements OnInit {
-    entries$: Observable<BankDataEntry[]>;
-    entriesChanged: boolean = false;    
+    entries$: Observable<BankDataEntry[]>;    
 
-    constructor(private bankDataQuery: BankDataQuery,
-        private bankDataService: BankDataService) {}
+    constructor(private bankDataQuery: BankDataQuery) {}
 
     ngOnInit(): void {
         this.entries$ = this.bankDataQuery.selectAll();
-    }
-
-    onEntryChanged(entry: BankDataEntry) {
-        this.bankDataService.updateEntry(entry.id, entry);
-        this.entriesChanged = true;
-    }
-
-    onUpload() {
-        this.entries$
-            .pipe(
-                take(1),
-                mergeMap(entries => this.bankDataService.uploadAll(entries)
-            )).subscribe(obj => {
-                console.log('data saved? ' + JSON.stringify(obj));
-                this.entriesChanged = false;
-            });
-    }
+    }    
 }

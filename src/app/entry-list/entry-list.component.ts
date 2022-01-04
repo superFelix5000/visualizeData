@@ -1,11 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { Sort } from '@angular/material/sort';
+import { mergeMap, take } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
 import { DataEntrySort } from '../shared/data-entry-sort';
 import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
+import { BankDataQuery } from '../state/bank.data.query';
+import { BankDataService } from '../state/bank.data.service';
 
 @Component({
     selector: 'app-entry-list',
@@ -14,8 +17,8 @@ import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
 })
 export class EntryListComponent {
 
-    @Input() entries: BankDataEntry[];
-    @Output() entryChanged: EventEmitter<BankDataEntry> = new EventEmitter<BankDataEntry>();
+    @Input() entries: BankDataEntry[] = [];
+    entryChanged: boolean = false;
 
     columnsToDisplay = [
         'date',
@@ -31,6 +34,9 @@ export class EntryListComponent {
     sort: DataEntrySort;
     sortDirection: DataEntrySortDirection;
     categoryType = Category;
+
+    constructor(private bankDataService: BankDataService,
+                private bankDataQuery: BankDataQuery) {}
 
     updatePageData(event: PageEvent): void {
         this.size = event.pageSize;
@@ -49,11 +55,19 @@ export class EntryListComponent {
     onCategorySelectionChange(
         entry: BankDataEntry,
         event: MatSelectChange
-    ): void {
-        const changedEntry: BankDataEntry = {
-            ...entry,
-            category: event.value
-        };
-        this.entryChanged.emit(changedEntry);
-    }        
+    ): void {        
+        this.bankDataService.updateEntry(entry.id, {category: event.value});
+        this.entryChanged = true;
+    }     
+
+    onUpload() {
+        this.bankDataQuery.selectAll()
+            .pipe(
+                take(1),
+                mergeMap(entries => this.bankDataService.uploadAll(entries)
+            )).subscribe(obj => {
+                console.log('data saved? ' + JSON.stringify(obj));
+                this.entryChanged = false;
+            });
+    }
 }

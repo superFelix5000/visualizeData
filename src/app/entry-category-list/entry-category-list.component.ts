@@ -51,7 +51,7 @@ export class EntryCategoryListComponent implements OnInit {
         changedEntry: RecipientCategory,
         event: MatSelectChange
     ): void {
-
+        // TODO: update entry to the store?
         this.entries = this.entries.map(entry => {
             if (entry.recipient === changedEntry.recipient){
                 return {
