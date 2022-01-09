@@ -43,5 +43,8 @@
     <app-entry-list 
         (onEntryChanged)="onEntryChanged($event)" 
         (onUpload)="onUpload()"
-        [entries]="filteredBankDataEntries$ | async"></app-entry-list>
+        [entries]="filteredBankDataEntries$ | async">
+    </app-entry-list>
+
+    <app-stacked></app-stacked>
 </div>

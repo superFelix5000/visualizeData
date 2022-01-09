@@ -25,6 +25,7 @@ import { PrintSimpleDatePipe } from './pipes/print.simple.date.pipe';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { EntryCategoryListComponent } from './entry-category-list/entry-category-list.component';
 import { RecipientCategorySortPipe } from './pipes/recipient.category.sort.pipe';
+import { StackedComponent } from './stacked/stacked.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { RecipientCategorySortPipe } from './pipes/recipient.category.sort.pipe'
         UploadComponent,
         PieChartComponent,
         RecipientCategorySortPipe,
+        StackedComponent,
     ],
     imports: [
         BrowserModule,
