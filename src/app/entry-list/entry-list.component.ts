@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { Sort } from '@angular/material/sort';
@@ -18,6 +18,7 @@ import { BankDataService } from '../state/bank.data.service';
 export class EntryListComponent {
 
     @Input() entries: BankDataEntry[] = [];
+    @Output() onEntryChanged = new EventEmitter<Partial<BankDataEntry>>();
     entryChanged: boolean = false;
 
     columnsToDisplay = [
@@ -56,7 +57,8 @@ export class EntryListComponent {
         entry: BankDataEntry,
         event: MatSelectChange
     ): void {        
-        this.bankDataService.updateEntry(entry.id, {category: event.value});
+        this.onEntryChanged.emit({id: entry.id, category: event.value});        
+        // TODO: move flag to store and have global "sync" button
         this.entryChanged = true;
     }     
 

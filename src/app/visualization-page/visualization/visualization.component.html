@@ -40,5 +40,5 @@
         </div>
     </div>
 
-    <app-entry-list [entries]="filteredBankDataEntries$ | async"></app-entry-list>
+    <app-entry-list (onEntryChanged)="onEntryChanged($event)" [entries]="filteredBankDataEntries$ | async"></app-entry-list>
 </div>

@@ -79,4 +79,8 @@ export class VisualizationComponent implements OnInit {
         this.bankDataService.setMonth(ev.nodeindex + 1);
         this.bankDataService.setCategory(null);
     }
+
+    onEntryChanged(entry: Partial<BankDataEntry>) {
+        this.bankDataService.updateEntry(entry.id, entry);
+    }
 }

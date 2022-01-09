@@ -15,9 +15,14 @@ import { BankDataService } from '../state/bank.data.service';
 export class EntryListPageComponent implements OnInit {
     entries$: Observable<BankDataEntry[]>;    
 
-    constructor(private bankDataQuery: BankDataQuery) {}
+    constructor(private bankDataQuery: BankDataQuery,
+                private bankDataService: BankDataService) {}
 
     ngOnInit(): void {
         this.entries$ = this.bankDataQuery.selectAll();
-    }    
+    }
+
+    onEntryChanged(entry: Partial<BankDataEntry>) {
+        this.bankDataService.updateEntry(entry.id, entry);
+    }
 }
