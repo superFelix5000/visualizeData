@@ -19,6 +19,8 @@ export class EntryListComponent {
 
     @Input() entries: BankDataEntry[] = [];
     @Output() onEntryChanged = new EventEmitter<Partial<BankDataEntry>>();
+    @Output() onUpload = new EventEmitter();
+
     entryChanged: boolean = false;
 
     columnsToDisplay = [
@@ -60,16 +62,10 @@ export class EntryListComponent {
         this.onEntryChanged.emit({id: entry.id, category: event.value});        
         // TODO: move flag to store and have global "sync" button
         this.entryChanged = true;
-    }     
+    }    
 
-    onUpload() {
-        this.bankDataQuery.selectAll()
-            .pipe(
-                take(1),
-                mergeMap(entries => this.bankDataService.uploadAll(entries)
-            )).subscribe(obj => {
-                console.log('data saved? ' + JSON.stringify(obj));
-                this.entryChanged = false;
-            });
+    onUploadClicked() {
+        this.onUpload.emit();
+        this.entryChanged = false;
     }
 }

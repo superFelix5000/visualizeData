@@ -3,8 +3,6 @@ import { Observable } from 'rxjs';
 import { mergeMap, take } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
-import { Category } from '../shared/categories';
-import { RecipientCategory } from '../shared/recipient-category';
 import { BankDataService } from '../state/bank.data.service';
 
 @Component({
@@ -24,5 +22,15 @@ export class EntryListPageComponent implements OnInit {
 
     onEntryChanged(entry: Partial<BankDataEntry>) {
         this.bankDataService.updateEntry(entry.id, entry);
+    }
+
+    onUpload() {
+        this.bankDataQuery.selectAll()
+            .pipe(
+                take(1),
+                mergeMap(entries => this.bankDataService.uploadAll(entries)
+            )).subscribe(obj => {
+                console.log('data saved? ' + JSON.stringify(obj));
+            });
     }
 }

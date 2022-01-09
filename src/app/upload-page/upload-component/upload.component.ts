@@ -21,10 +21,17 @@ export class UploadComponent {
         });
     }
 
-    // TODO! add functionality here to be able to change the category on the new entries already
-
     onUpload() {
         this.bankDataService.appendAll(this.entries).subscribe();
     }
 
+    onEntryChanged(changedEntry: Partial<BankDataEntry>) {
+        this.entries = this.entries.map(entry => {
+            if(entry.id === changedEntry.id) {
+                return {...entry, category: changedEntry.category};
+            } else {
+                return entry;
+            }
+        });
+    }
 }

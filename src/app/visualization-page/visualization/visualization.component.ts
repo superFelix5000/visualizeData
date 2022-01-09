@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, mergeMap, take } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { YEARS } from 'src/app/shared/constants';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
@@ -82,5 +82,15 @@ export class VisualizationComponent implements OnInit {
 
     onEntryChanged(entry: Partial<BankDataEntry>) {
         this.bankDataService.updateEntry(entry.id, entry);
+    }
+
+    onUpload() {
+        this.bankDataQuery.selectAll()
+            .pipe(
+                take(1),
+                mergeMap(entries => this.bankDataService.uploadAll(entries)
+            )).subscribe(obj => {
+                console.log('data saved? ' + JSON.stringify(obj));
+            });
     }
 }
