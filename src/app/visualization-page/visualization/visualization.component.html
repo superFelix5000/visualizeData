@@ -15,14 +15,17 @@
             *ngFor="let yearBalance of yearTotals$ | async; let i = index"
             (click)="onYearSelectionChange(years[i])"
         >
-            <h3 class="font-bold">{{ years[i] }}</h3>
-            <h4
-                class="ml-2"
+            <div class="font-bold">{{ years[i] }}</div>
+            <div
+                class="pb-2 font-bold"
                 [class.positive]="(yearBalance.plus + yearBalance.minus) > 0"
                 [class.negative]="(yearBalance.plus + yearBalance.minus) < 0"
             >
                 {{ (yearBalance.plus + yearBalance.minus) | number }}
-            </h4>
+            </div>
+            <p class="text-xs text-green-500">{{yearBalance.plus | number}}</p>
+            <p class="text-xs text-red-500">{{yearBalance.minus | number}}</p>
+            
         </button>
     </div>
 
