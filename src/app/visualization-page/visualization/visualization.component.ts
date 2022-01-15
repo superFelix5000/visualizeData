@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, mergeMap, take } from 'rxjs/operators';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { YEARS } from 'src/app/shared/constants';
 import { YearTotals } from 'src/app/shared/year-totals';
@@ -18,7 +18,7 @@ export class VisualizationComponent implements OnInit {
     // TODO: not used atm
     selectedYear$: Observable<number>;
 
-    yearTotals$: Observable<YearTotals[]> = of([]);
+    yearTotals$: Observable<YearTotals[]> = of([]); 
     valuesPerMonth$: Observable<zingchart.series[]>;
     filteredBankDataEntries$: Observable<BankDataEntry[]>;
     config: zingchart.graphset = {
