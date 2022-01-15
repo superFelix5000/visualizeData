@@ -8,20 +8,20 @@
 
     <div
         class="flex flex-row flex-wrap"
-        *ngIf="(yearBalances$ | async).length > 0"
+        *ngIf="(yearTotals$ | async).length > 0"
     >
         <button
             class="z-10 flex flex-col items-center m-5 p-5 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 rounded-lg shadow-xl cursor-pointer"
-            *ngFor="let yearBalance of yearBalances$ | async; let i = index"
+            *ngFor="let yearBalance of yearTotals$ | async; let i = index"
             (click)="onYearSelectionChange(years[i])"
         >
             <h3 class="font-bold">{{ years[i] }}</h3>
             <h4
                 class="ml-2"
-                [class.positive]="yearBalance > 0"
-                [class.negative]="yearBalance < 0"
+                [class.positive]="(yearBalance.plus + yearBalance.minus) > 0"
+                [class.negative]="(yearBalance.plus + yearBalance.minus) < 0"
             >
-                {{ yearBalance | number }}
+                {{ (yearBalance.plus + yearBalance.minus) | number }}
             </h4>
         </button>
     </div>
@@ -40,11 +40,12 @@
         </div>
     </div>
 
+    <app-stacked></app-stacked>
+
     <app-entry-list 
         (onEntryChanged)="onEntryChanged($event)" 
         (onUpload)="onUpload()"
         [entries]="filteredBankDataEntries$ | async">
     </app-entry-list>
 
-    <app-stacked></app-stacked>
 </div>

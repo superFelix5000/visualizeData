@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map, mergeMap, take } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { YEARS } from 'src/app/shared/constants';
+import { YearTotals } from 'src/app/shared/year-totals';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
 
@@ -17,7 +18,7 @@ export class VisualizationComponent implements OnInit {
     // TODO: not used atm
     selectedYear$: Observable<number>;
 
-    yearBalances$: Observable<number[]> = of([]);
+    yearTotals$: Observable<YearTotals[]> = of([]);
     valuesPerMonth$: Observable<zingchart.series[]>;
     filteredBankDataEntries$: Observable<BankDataEntry[]>;
     config: zingchart.graphset = {
@@ -56,7 +57,7 @@ export class VisualizationComponent implements OnInit {
     ngOnInit(): void {
         this.bankDataService.init();
 
-        this.yearBalances$ = this.bankDataQuery.selectYearBalances$;
+        this.yearTotals$ = this.bankDataQuery.selectYearTotals$;
         this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
         this.valuesPerMonth$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
             map((values) => [{ values: values }])
