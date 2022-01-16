@@ -95,6 +95,15 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         });
     }));
 
+    selectAllEntriesPerSelectedYear$: Observable<BankDataEntry[]> = combineLatest([
+        this.selectAllEntriesWithMatchedCategories$,
+        this.selectCurrentYear$
+    ]).pipe(
+        map(([entries, year]) => entries
+            .filter(entries => entries.paymentDate.year === year)
+        )
+    );
+
     selectAllEntriesPerSelectedYearAndMonth$: Observable<BankDataEntry[]> = combineLatest([
         this.selectAllEntriesWithMatchedCategories$,
         this.selectCurrentYear$,

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { BankDataQuery } from '../state/bank.data.query';
+import { Category } from 'src/app/shared/categories';
+import { CategoryColorMap } from 'src/app/shared/category-colors';
+import { filter } from 'rxjs';
 
 @Component({
     selector: 'app-stacked',
@@ -7,29 +11,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StackedComponent implements OnInit {
 
-    myConfig:zingchart.graphset = {
+    series: zingchart.series[];
+    myConfig: zingchart.graphset = {
         type: "bar",
         plot: {
-            stacked: true
+            stacked: true,
+            tooltip: {
+                fontSize: '18',
+                fontFamily: "Roboto",
+                padding: "5 10",
+                text: "%t\n%v",
+                decimals: 2
+              }
+        },        
+        'scale-x': {
+            values: [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December',
+            ],
         },
-        series: [{
-            values: [-20, 40, 25, 50, 15, 45, 33, 34],
-            stack: 1
-        },
-        {
-            values: [5, 30, 21, 18, 59, 50, 28, 33],
-            stack: 1
-        },
-        {
-            values: [30, 5, 18, 21, 33, 41, 29, 15],
-            stack: 2
-        }
-        ]
     };
 
-constructor() { }
+    constructor(private bankDataQuery: BankDataQuery) { }
 
-ngOnInit(): void {
-}
+    ngOnInit(): void {        
+        this.bankDataQuery.selectAllEntriesPerSelectedYear$
+            .pipe(filter(entries => entries.length > 0))
+            .subscribe(entries => {
+                let series: {}[] = [];
+                for(let key in Category) {
+                    let monthValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                    for (let i = 0; i < 12; i++) {
+                        monthValues[i] = entries
+                            .filter(entry => entry.paymentDate.month === i+1)
+                            .filter(entry => entry.category === Category[key])
+                            .map(entry => entry.amount)
+                            .reduce((a,b) => a + b, 0);
+                    }
+                    series.push({
+                        values: monthValues,
+                        backgroundColor: CategoryColorMap.get(Category[key]),
+                        text: key
+                    });
+                }
+                this.series = series;
+        });             
+    }
 
 }
