@@ -70,27 +70,40 @@ export class BankDataService {
         return this.http.get<CategoryMapFetchServerData>(this.baseUrl + '/api/v1/fetchCategoryMap');
     }
 
+    //ALT: 29.04.2022	29.04.2022	29.04.2022	3225,62	SITOWISE OY			Pano		T20220426-133295	Palkka kaudelta 4/2022 		E	
+    //NEU: 2022/08/01;-12,39;FI52 1012 3500 3547 31;;;ADOBE PHOTOGPHY PLAN;;EUR
+    //NEU: 
+    /*
+        0 Kirjauspäivä;
+        1 Määrä;
+        2 Maksaja;
+        3 Maksunsaaja;
+        4 Nimi;
+        5 Otsikko;
+        6 Viitenumero;
+        7 Valuutta
+    */
     readBankDataEntriesFromData(data: string): BankDataEntry[] {
         const bankDataEntries: BankDataEntry[] = [];
-        const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, '\t');
+        const entries: any[][] = this.ngxCsvParser.csvStringToArray(data, ';');
         entries
             .filter((entry) => entry.length > 3)
             .forEach((entry) => {
                 bankDataEntries.push(
                     createBankDataEntry(
-                        this.convertStringToDate(entry[0]),
-                        this.convertStringToDate(entry[1]),
-                        this.convertStringToDate(entry[2]),
-                        parseFloat(entry[3].replace(',', '.')),
-                        (entry[4] as string).toLowerCase(),
-                        entry[5],
-                        entry[6],
-                        entry[7],
-                        entry[8],
-                        entry[9],
-                        entry[10],
-                        entry[11],
-                        entry[12]
+                        this.convertStringToDate(entry[0]), //postingdate
+                        this.convertStringToDate(entry[0]), // valuedate
+                        this.convertStringToDate(entry[0]), // paymentdate
+                        parseFloat(entry[1].replace(',', '.')), // amount 
+                        (entry[5] as string).toLowerCase(), // recipientorpayer
+                        entry[2], //accountnumber
+                        0, // entry[6], // bic
+                        "",//entry[7], // event
+                        "", //entry[8], // reference
+                        "", //entry[9], // payerreference
+                        "", //entry[10], // message
+                        0, //entry[11], // cardnumber
+                        "", //entry[12] // receipt
                     )
                 );
             });
@@ -102,9 +115,9 @@ export class BankDataService {
     }
 
     private convertStringToDate(stringDate: string): SimpleDate {
-        const day = parseInt(stringDate.substring(0, 2));
-        const month = parseInt(stringDate.substring(3, 5));
-        const year = parseInt(stringDate.substring(6, 10));
+        const day = parseInt(stringDate.substring(8, 10));
+        const month = parseInt(stringDate.substring(5, 7));
+        const year = parseInt(stringDate.substring(0, 4));
         return new SimpleDate(day, month, year);
     }
 }
