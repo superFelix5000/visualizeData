@@ -25,7 +25,7 @@
     "@angular/router": "~13.1.1",
     "@datorama/akita": "^7.1.0",
     "autoprefixer": "^10.4.2",
-    "ngx-csv-parser": "0.0.7",
+    "ngx-csv-parser": "1.1.1",
     "npm-check-updates": "^12.1.0",
     "postcss": "^8.4.5",
     "rxjs": "^7.5.1",
