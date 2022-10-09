@@ -3,6 +3,7 @@ import { filter } from 'rxjs';
 import { Category } from 'src/app/shared/categories';
 import { CategoryColorMap } from 'src/app/shared/category-colors';
 import { BankDataQuery } from '../state/bank.data.query';
+import zingchart from 'zingchart/es6';
 
 @Component({
     selector: 'app-stacked',

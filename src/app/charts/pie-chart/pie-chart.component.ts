@@ -5,6 +5,7 @@ import { CategoryColorMap } from 'src/app/shared/category-colors';
 import { CategoryPercentage } from 'src/app/shared/category-percentage';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
+import zingchart from 'zingchart/es6';
 
 @Component({
     selector: 'app-pie-chart',

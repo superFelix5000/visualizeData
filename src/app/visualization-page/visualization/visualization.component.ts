@@ -6,6 +6,7 @@ import { YEARS } from 'src/app/shared/constants';
 import { YearTotals } from 'src/app/shared/year-totals';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
+import zingchart from 'zingchart/es6';
 
 @Component({
     selector: 'app-visualization',

@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json .
 RUN npm install --legacy-peer-deps
-RUN npm install -g @angular/cli@13.1.2
+RUN npm install -g @angular/cli@14.2.1
 COPY . /app
 RUN ng build --output-path=dist
 
