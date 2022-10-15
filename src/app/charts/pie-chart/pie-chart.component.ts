@@ -46,9 +46,6 @@
                     events: ['click'],
                     interaction: {
                         mode: 'index'
-                    },
-                    onClick: function(e, elements, chart) {
-                        // this.onChartClick(elements);
                     }
                 }
             });
