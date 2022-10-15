@@ -19,8 +19,8 @@
 
         constructor(private bankDataQuery: BankDataQuery,
                     private bankDataService: BankDataService) {
-                    Chart.register(...registerables);
-                    }
+            Chart.register(...registerables);
+        }
 
         ngOnInit(): void {
             const labels = [
@@ -42,7 +42,15 @@
                         hoverOffset: 4
                     }]
                 },
-                options: {}
+                options: {
+                    events: ['click'],
+                    interaction: {
+                        mode: 'index'
+                    },
+                    onClick: function(e, elements, chart) {
+                        // this.onChartClick(elements);
+                    }
+                }
             });
 
             this.bankDataQuery.selectAllCategoriesPerSelectedYearAndMonth$.pipe(
@@ -52,13 +60,17 @@
                 var labels: string[] = [];
                 var colors: string[] = [];
                 var dataPoints: number[] = [];
+                this.categoryPercentages = [];
 
-                values.map(categoryPercentage => {
+                values.map(
+                    categoryPercentage => {
+                        this.categoryPercentages.push(categoryPercentage);
                         labels.push(categoryPercentage.category.toString());
                         colors.push(CategoryColorMap.get(categoryPercentage.category));
                         dataPoints.push(categoryPercentage.totalValue);
                     }
                 );
+
                 this.myChart.data = {
                     labels: labels,
                     datasets: [{
@@ -72,8 +84,10 @@
         }
 
         // TODO: add type for event?
-        // TODO: re-implement this
-        nodeClicked(ev) {
-            this.bankDataService.setCategory(this.categoryPercentages[ev.plotindex].category);
+        onChartClick(e) {
+            const items = this.myChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+            if (items && items.length == 1) {
+                this.bankDataService.setCategory(this.categoryPercentages[items[0].index].category);
+            }            
         }
     }
