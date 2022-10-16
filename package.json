@@ -31,8 +31,6 @@
     "postcss": "^8.4.18",
     "rxjs": "^7.5.7",
     "tslib": "^2.4.0",
-    "zingchart": "^2.9.9",
-    "zingchart-angular": "^1.0.10",
     "zone.js": "~0.11.8"
   },
   "devDependencies": {

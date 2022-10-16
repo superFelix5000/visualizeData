@@ -6,7 +6,6 @@ import { YEARS } from 'src/app/shared/constants';
 import { YearTotals } from 'src/app/shared/year-totals';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { BankDataService } from 'src/app/state/bank.data.service';
-import zingchart from 'zingchart/es6';
 
 @Component({
     selector: 'app-visualization',
@@ -20,35 +19,7 @@ export class VisualizationComponent implements OnInit {
     selectedYear$: Observable<number>;
 
     yearTotals$: Observable<YearTotals[]> = of([]); 
-    valuesPerMonth$: Observable<zingchart.series[]>;
-    filteredBankDataEntries$: Observable<BankDataEntry[]>;
-    config: zingchart.graphset = {
-        type: 'bar',
-        plot: {
-            'border-radius': '5px',
-            valueBox: {
-                text: '%stack-total',
-                decimals: 0,
-                fontSize: "20px"
-            },
-        },
-        'scale-x': {
-            values: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-            ],
-        },
-    };
+    filteredBankDataEntries$: Observable<BankDataEntry[]>;    
 
     constructor(
         private bankDataQuery: BankDataQuery,
@@ -60,9 +31,6 @@ export class VisualizationComponent implements OnInit {
 
         this.yearTotals$ = this.bankDataQuery.selectYearTotals$;
         this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
-        this.valuesPerMonth$ = this.bankDataQuery.selectCurrentMonthValues$.pipe(
-            map((values) => [{ values: values }])
-        );
         this.filteredBankDataEntries$ = this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonthAndCategory$;
     }
 

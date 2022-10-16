@@ -2,7 +2,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
-import { ZingchartAngularModule } from 'zingchart-angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -26,6 +25,7 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import { EntryCategoryListComponent } from './entry-category-list/entry-category-list.component';
 import { RecipientCategorySortPipe } from './pipes/recipient.category.sort.pipe';
 import { StackedComponent } from './charts/stacked/stacked.component';
+import { YearBarchartComponent } from './charts/year-barchart/year-barchart.component';
 
 @NgModule({
     declarations: [
@@ -41,12 +41,12 @@ import { StackedComponent } from './charts/stacked/stacked.component';
         PieChartComponent,
         RecipientCategorySortPipe,
         StackedComponent,
+        YearBarchartComponent,
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        ZingchartAngularModule,
         NgxCsvParserModule,
         HttpClientModule,
         FormsModule,
