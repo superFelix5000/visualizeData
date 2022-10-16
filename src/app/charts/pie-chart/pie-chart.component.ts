@@ -43,7 +43,6 @@
                     }]
                 },
                 options: {
-                    events: ['click'],
                     interaction: {
                         mode: 'index'
                     }
