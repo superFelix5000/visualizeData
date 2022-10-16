@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { filter } from 'rxjs';
 import { Category } from 'src/app/shared/categories';
 import { CategoryColorMap } from 'src/app/shared/category-colors';
 import { BankDataQuery } from '../../state/bank.data.query';
-import zingchart from 'zingchart/es6';
+import { Chart, ChartConfiguration, registerables } from 'chart.js';
 
 @Component({
     selector: 'app-stacked',
@@ -11,45 +11,59 @@ import zingchart from 'zingchart/es6';
     styleUrls: ['./stacked.component.scss']
 })
 export class StackedComponent implements OnInit {
+    
+    @ViewChild('canvas', {static: true}) myCanvas: ElementRef<HTMLCanvasElement>;
+    private myChart: Chart;
 
-    series: zingchart.series[];
-    myConfig: zingchart.graphset = {
-        type: "bar",
-        plot: {
-            stacked: true,
-            tooltip: {
-                fontSize: '18',
-                fontFamily: "Roboto",
-                padding: "5 10",
-                text: "%t\n%v",
-                decimals: 2
-              }
-        },        
-        'scale-x': {
-            values: [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December',
-            ],
-        },
-    };
-
-    constructor(private bankDataQuery: BankDataQuery) { }
+    constructor(private bankDataQuery: BankDataQuery) { 
+        Chart.register(...registerables);
+    }
 
     ngOnInit(): void {        
+
+        const labels = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December',
+        ];
+
+        const data = {
+            labels: labels,
+            datasets: []
+        };
+
+        const config:ChartConfiguration = {
+            type: 'bar',
+            data: data,
+            options: {              
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                },
+                y: {
+                  stacked: true
+                }
+              }
+            }
+          };        
+
+        this.myChart = new Chart(this.myCanvas.nativeElement.getContext('2d'), config);
+
+
         this.bankDataQuery.selectAllEntriesPerSelectedYear$
             .pipe(filter(entries => entries.length > 0))
             .subscribe(entries => {
-                let series: {}[] = [];
+                this.myChart.data.datasets = [];
                 for(let key in Category) {
                     let monthValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     for (let i = 0; i < 12; i++) {
@@ -59,14 +73,17 @@ export class StackedComponent implements OnInit {
                             .map(entry => entry.amount)
                             .reduce((a,b) => a + b, 0);
                     }
-                    series.push({
-                        values: monthValues,
+                    this.myChart.data.datasets.push({
+                        data: monthValues,
                         backgroundColor: CategoryColorMap.get(Category[key]),
-                        text: key
+                        label: key
                     });
                 }
-                this.series = series;
-        });             
+                this.myChart.update();                
+        });    
     }
 
+    onChartClick(e){
+        // TODO: implement?
+    }
 }

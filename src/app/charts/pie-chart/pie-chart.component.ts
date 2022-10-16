@@ -23,19 +23,9 @@
         }
 
         ngOnInit(): void {
-            const labels = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-            ];
-
             this.myChart = new Chart(this.myCanvas.nativeElement.getContext('2d'), {
                 type: 'doughnut',
                 data: {
-                    labels: labels,
                     datasets: [{
                         data: [],
                         backgroundColor: [],
