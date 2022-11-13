@@ -1,19 +1,21 @@
-<mat-form-field class="example-form-field" appearance="fill">
-    <mat-label>Search</mat-label>
-    <input matInput type="text" [(ngModel)]="searchFieldValue">
-    <button *ngIf="searchFieldValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchFieldValue=''">
-    <mat-icon>close</mat-icon>
-    </button>
-</mat-form-field>
-
-<mat-paginator
-    [length]="entries?.length"
-    [pageSize]="size"
-    [pageSizeOptions]="[5, 10, 25, 100]"
-    (page)="updatePageData($event)"
-    showFirstLastButtons
->
-</mat-paginator>
+<div class="flex flex-row justify-between">
+    <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" [(ngModel)]="searchFieldValue">
+        <button *ngIf="searchFieldValue" matSuffix mat-icon-button aria-label="Clear" (click)="searchFieldValue=''">
+        <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
+    
+    <mat-paginator
+        [length]="entries?.length"
+        [pageSize]="size"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="updatePageData($event)"
+        showFirstLastButtons
+        >
+    </mat-paginator>
+</div>
 
 <table
     class="table"
