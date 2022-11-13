@@ -1,4 +1,4 @@
-import { Category } from "./categories";
+import { Category } from './categories';
 
 export const CategoryColorMap: Map<Category, string> = new Map([
     [Category.BAARI, '#800000'],

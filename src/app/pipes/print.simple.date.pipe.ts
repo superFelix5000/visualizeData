@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { SimpleDate } from "../shared/simple-date";
+import { Pipe, PipeTransform } from '@angular/core';
+import { SimpleDate } from '../shared/simple-date';
 
 @Pipe({ name: 'printSimpleDate' })
 export class PrintSimpleDatePipe implements PipeTransform {

@@ -8,15 +8,15 @@ import { Category } from '../shared/categories';
 export interface BankDataState extends EntityState<BankDataEntry, string> {
     selectedYear: number;
     selectedMonth: number;
-    recipientCategories: RecipientCategory[],
-    selectedCategory: Category
+    recipientCategories: RecipientCategory[];
+    selectedCategory: Category;
 }
 
 const initialState: BankDataState = {
     selectedYear: YEARS[YEARS.length - 1],
     recipientCategories: [],
     selectedMonth: null,
-    selectedCategory: null
+    selectedCategory: null,
 };
 
 @Injectable({

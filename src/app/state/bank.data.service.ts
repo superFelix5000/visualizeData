@@ -5,7 +5,10 @@ import { Observable } from 'rxjs';
 import { BankDataEntry, createBankDataEntry } from '../shared/bank-data-entry';
 import { Category } from '../shared/categories';
 import { RecipientCategory } from '../shared/recipient-category';
-import { BankDataFetchServerData, CategoryMapFetchServerData } from '../shared/server-data';
+import {
+    BankDataFetchServerData,
+    CategoryMapFetchServerData,
+} from '../shared/server-data';
 import { SimpleDate } from '../shared/simple-date';
 import { BankDataStore } from './bank.data.store';
 
@@ -36,7 +39,9 @@ export class BankDataService {
     }
 
     setRecipientCategories(entries: RecipientCategory[]) {
-        this.bankDataStore.update((state) => ({recipientCategories: entries}));
+        this.bankDataStore.update((state) => ({
+            recipientCategories: entries,
+        }));
     }
 
     reloadData(): void {
@@ -45,9 +50,11 @@ export class BankDataService {
         this.downloadAll().subscribe((data: BankDataFetchServerData) => {
             this.bankDataStore.add(data.data);
         });
-        this.downloadRecipientCategories().subscribe((data: CategoryMapFetchServerData) => {
-            this.setRecipientCategories(data.data);
-        });        
+        this.downloadRecipientCategories().subscribe(
+            (data: CategoryMapFetchServerData) => {
+                this.setRecipientCategories(data.data);
+            }
+        );
     }
 
     uploadAll(entries: BankDataEntry[]): Observable<Object> {
@@ -59,20 +66,29 @@ export class BankDataService {
     }
 
     downloadAll(): Observable<BankDataFetchServerData> {
-        return this.http.get<BankDataFetchServerData>(this.baseUrl + '/api/v1/fetchAll');
+        return this.http.get<BankDataFetchServerData>(
+            this.baseUrl + '/api/v1/fetchAll'
+        );
     }
 
-    uploadRecipientCategories(entries: RecipientCategory[]): Observable<Object> {
-        return this.http.post(this.baseUrl + '/api/v1/saveCategoryMap', entries);
+    uploadRecipientCategories(
+        entries: RecipientCategory[]
+    ): Observable<Object> {
+        return this.http.post(
+            this.baseUrl + '/api/v1/saveCategoryMap',
+            entries
+        );
     }
 
     downloadRecipientCategories(): Observable<CategoryMapFetchServerData> {
-        return this.http.get<CategoryMapFetchServerData>(this.baseUrl + '/api/v1/fetchCategoryMap');
+        return this.http.get<CategoryMapFetchServerData>(
+            this.baseUrl + '/api/v1/fetchCategoryMap'
+        );
     }
 
-    //ALT: 29.04.2022	29.04.2022	29.04.2022	3225,62	SITOWISE OY			Pano		T20220426-133295	Palkka kaudelta 4/2022 		E	
+    //ALT: 29.04.2022	29.04.2022	29.04.2022	3225,62	SITOWISE OY			Pano		T20220426-133295	Palkka kaudelta 4/2022 		E
     //NEU: 2022/08/01;-12,39;FI52 1012 3500 3547 31;;;ADOBE PHOTOGPHY PLAN;;EUR
-    //NEU: 
+    //NEU:
     /*
         0 Kirjauspäivä;
         1 Määrä;
@@ -94,16 +110,16 @@ export class BankDataService {
                         this.convertStringToDate(entry[0]), //postingdate
                         this.convertStringToDate(entry[0]), // valuedate
                         this.convertStringToDate(entry[0]), // paymentdate
-                        parseFloat(entry[1].replace(',', '.')), // amount 
+                        parseFloat(entry[1].replace(',', '.')), // amount
                         (entry[5] as string).toLowerCase(), // recipientorpayer
                         entry[2], //accountnumber
                         0, // entry[6], // bic
-                        "",//entry[7], // event
-                        "", //entry[8], // reference
-                        "", //entry[9], // payerreference
-                        "", //entry[10], // message
+                        '', //entry[7], // event
+                        '', //entry[8], // reference
+                        '', //entry[9], // payerreference
+                        '', //entry[10], // message
                         0, //entry[11], // cardnumber
-                        "", //entry[12] // receipt
+                        '' //entry[12] // receipt
                     )
                 );
             });

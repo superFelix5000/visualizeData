@@ -8,19 +8,18 @@ import { Chart, ChartConfiguration, registerables } from 'chart.js';
 @Component({
     selector: 'app-stacked',
     templateUrl: './stacked.component.html',
-    styleUrls: ['./stacked.component.scss']
+    styleUrls: ['./stacked.component.scss'],
 })
 export class StackedComponent implements OnInit {
-    
-    @ViewChild('canvas', {static: true}) myCanvas: ElementRef<HTMLCanvasElement>;
+    @ViewChild('canvas', { static: true })
+    myCanvas: ElementRef<HTMLCanvasElement>;
     private myChart: Chart;
 
-    constructor(private bankDataQuery: BankDataQuery) { 
+    constructor(private bankDataQuery: BankDataQuery) {
         Chart.register(...registerables);
     }
 
-    ngOnInit(): void {        
-
+    ngOnInit(): void {
         const labels = [
             'January',
             'February',
@@ -38,52 +37,56 @@ export class StackedComponent implements OnInit {
 
         const data = {
             labels: labels,
-            datasets: []
+            datasets: [],
         };
 
-        const config:ChartConfiguration = {
+        const config: ChartConfiguration = {
             type: 'bar',
             data: data,
-            options: {              
-              responsive: true,
-              scales: {
-                x: {
-                  stacked: true,
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        stacked: true,
+                    },
+                    y: {
+                        stacked: true,
+                    },
                 },
-                y: {
-                  stacked: true
-                }
-              }
-            }
-          };        
+            },
+        };
 
-        this.myChart = new Chart(this.myCanvas.nativeElement.getContext('2d'), config);
-
+        this.myChart = new Chart(
+            this.myCanvas.nativeElement.getContext('2d'),
+            config
+        );
 
         this.bankDataQuery.selectAllEntriesPerSelectedYear$
-            .pipe(filter(entries => entries.length > 0))
-            .subscribe(entries => {
+            .pipe(filter((entries) => entries.length > 0))
+            .subscribe((entries) => {
                 this.myChart.data.datasets = [];
-                for(let key in Category) {
-                    let monthValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                for (const key in Category) {
+                    const monthValues = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     for (let i = 0; i < 12; i++) {
                         monthValues[i] = entries
-                            .filter(entry => entry.paymentDate.month === i+1)
-                            .filter(entry => entry.category === Category[key])
-                            .map(entry => entry.amount)
-                            .reduce((a,b) => a + b, 0);
+                            .filter(
+                                (entry) => entry.paymentDate.month === i + 1
+                            )
+                            .filter((entry) => entry.category === Category[key])
+                            .map((entry) => entry.amount)
+                            .reduce((a, b) => a + b, 0);
                     }
                     this.myChart.data.datasets.push({
                         data: monthValues,
                         backgroundColor: CategoryColorMap.get(Category[key]),
-                        label: key
+                        label: key,
                     });
                 }
-                this.myChart.update();                
-        });    
+                this.myChart.update();
+            });
     }
 
-    onChartClick(e){
+    onChartClick(e) {
         // TODO: implement?
     }
 }

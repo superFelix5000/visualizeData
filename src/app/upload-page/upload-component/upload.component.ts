@@ -8,16 +8,16 @@ import { BankDataService } from 'src/app/state/bank.data.service';
     styleUrls: ['./upload.component.scss'],
 })
 export class UploadComponent {
-
     entries: BankDataEntry[] = [];
 
-    constructor(private bankDataService: BankDataService){}
+    constructor(private bankDataService: BankDataService) {}
 
     onFileInput(event: Event) {
         const target = event.target as HTMLInputElement;
         const file: File = target.files[0];
         file.text().then((text) => {
-            this.entries = this.bankDataService.readBankDataEntriesFromData(text);
+            this.entries =
+                this.bankDataService.readBankDataEntriesFromData(text);
         });
     }
 
@@ -26,9 +26,9 @@ export class UploadComponent {
     }
 
     onEntryChanged(changedEntry: Partial<BankDataEntry>) {
-        this.entries = this.entries.map(entry => {
-            if(entry.id === changedEntry.id) {
-                return {...entry, category: changedEntry.category};
+        this.entries = this.entries.map((entry) => {
+            if (entry.id === changedEntry.id) {
+                return { ...entry, category: changedEntry.category };
             } else {
                 return entry;
             }

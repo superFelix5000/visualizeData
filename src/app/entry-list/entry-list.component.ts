@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { Sort } from '@angular/material/sort';
-import { mergeMap, take } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
 import { DataEntrySort } from '../shared/data-entry-sort';
@@ -16,12 +15,11 @@ import { BankDataService } from '../state/bank.data.service';
     styleUrls: ['./entry-list.component.scss'],
 })
 export class EntryListComponent {
-
     @Input() entries: BankDataEntry[] = [];
     @Output() onEntryChanged = new EventEmitter<Partial<BankDataEntry>>();
     @Output() onUpload = new EventEmitter();
 
-    entryChanged: boolean = false;
+    entryChanged = false;
 
     columnsToDisplay = [
         'date',
@@ -38,8 +36,10 @@ export class EntryListComponent {
     sortDirection: DataEntrySortDirection;
     categoryType = Category;
 
-    constructor(private bankDataService: BankDataService,
-                private bankDataQuery: BankDataQuery) {}
+    constructor(
+        private bankDataService: BankDataService,
+        private bankDataQuery: BankDataQuery
+    ) {}
 
     updatePageData(event: PageEvent): void {
         this.size = event.pageSize;
@@ -58,11 +58,11 @@ export class EntryListComponent {
     onCategorySelectionChange(
         entry: BankDataEntry,
         event: MatSelectChange
-    ): void {        
-        this.onEntryChanged.emit({id: entry.id, category: event.value});        
+    ): void {
+        this.onEntryChanged.emit({ id: entry.id, category: event.value });
         // TODO: move flag to store and have global "sync" button
         this.entryChanged = true;
-    }    
+    }
 
     onUploadClicked() {
         this.onUpload.emit();

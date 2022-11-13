@@ -6,13 +6,13 @@ import { filter, map } from 'rxjs';
 import { BankDataService } from 'src/app/state/bank.data.service';
 
 @Component({
-  selector: 'app-year-barchart',
-  templateUrl: './year-barchart.component.html',
-  styleUrls: ['./year-barchart.component.scss']
+    selector: 'app-year-barchart',
+    templateUrl: './year-barchart.component.html',
+    styleUrls: ['./year-barchart.component.scss'],
 })
 export class YearBarchartComponent implements OnInit {
-
-    @ViewChild('canvas', {static: true}) myCanvas: ElementRef<HTMLCanvasElement>;
+    @ViewChild('canvas', { static: true })
+    myCanvas: ElementRef<HTMLCanvasElement>;
 
     private labels = [
         'January',
@@ -35,47 +35,58 @@ export class YearBarchartComponent implements OnInit {
         type: 'bar',
         data: {
             labels: this.labels,
-            datasets: []
+            datasets: [],
         },
         options: {
             plugins: {
                 legend: {
-                    display: false
-                }
-            }
-        }
-    }
+                    display: false,
+                },
+            },
+        },
+    };
 
-    constructor(private bankDataQuery: BankDataQuery,
-        private bankDataService: BankDataService) { 
+    constructor(
+        private bankDataQuery: BankDataQuery,
+        private bankDataService: BankDataService
+    ) {
         Chart.register(...registerables);
     }
 
     ngOnInit(): void {
-        this.myChart = new Chart(this.myCanvas.nativeElement.getContext('2d'), this.config);        
+        this.myChart = new Chart(
+            this.myCanvas.nativeElement.getContext('2d'),
+            this.config
+        );
 
-        this.bankDataQuery.selectCurrentMonthValues$.pipe(
-                filter(values => values.length > 0 && values.find(value => value > 0) > 0)
-            ).subscribe(
-                values => {
-                    this.myChart.data.datasets = [];
-                    this.myChart.data.datasets.push(
-                        {
-                            backgroundColor: 'blue',
-                            data: values
-                        }
-                    );
-                    this.myChart.update();
-                }
-            );
+        this.bankDataQuery.selectCurrentMonthValues$
+            .pipe(
+                filter(
+                    (values) =>
+                        values.length > 0 &&
+                        values.find((value) => value > 0) > 0
+                )
+            )
+            .subscribe((values) => {
+                this.myChart.data.datasets = [];
+                this.myChart.data.datasets.push({
+                    backgroundColor: 'blue',
+                    data: values,
+                });
+                this.myChart.update();
+            });
     }
 
-    onChartClick(e){
-        const items = this.myChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+    onChartClick(e) {
+        const items = this.myChart.getElementsAtEventForMode(
+            e,
+            'nearest',
+            { intersect: true },
+            true
+        );
         if (items && items.length == 1) {
             this.bankDataService.setMonth(items[0].index + 1);
             this.bankDataService.setCategory(null);
         }
     }
-
 }

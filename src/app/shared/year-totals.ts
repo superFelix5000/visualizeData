@@ -1,4 +1,4 @@
 export type YearTotals = {
-    plus: number,
-    minus: number
-}
+    plus: number;
+    minus: number;
+};

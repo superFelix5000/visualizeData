@@ -15,7 +15,7 @@ import { BankDataService } from '../state/bank.data.service';
     styleUrls: ['./entry-category-list.component.scss'],
 })
 export class EntryCategoryListComponent implements OnInit {
-    entryChanged: boolean = false;
+    entryChanged = false;
     entries: RecipientCategory[] = [];
 
     sortDirection: DataEntrySortDirection;
@@ -33,7 +33,7 @@ export class EntryCategoryListComponent implements OnInit {
     ngOnInit(): void {
         this.bankDataQuery.selectRecipientCategories$
             .pipe(
-                filter(entries => entries.length > 0),
+                filter((entries) => entries.length > 0),
                 take(1)
             )
             .subscribe((entries) => {
@@ -52,14 +52,14 @@ export class EntryCategoryListComponent implements OnInit {
         event: MatSelectChange
     ): void {
         // TODO: update entry to the store?
-        this.entries = this.entries.map(entry => {
-            if (entry.recipient === changedEntry.recipient){
+        this.entries = this.entries.map((entry) => {
+            if (entry.recipient === changedEntry.recipient) {
                 return {
                     recipient: entry.recipient,
-                    category: event.value
-                }
+                    category: event.value,
+                };
             } else {
-                return entry
+                return entry;
             }
         });
 
@@ -83,13 +83,21 @@ export class EntryCategoryListComponent implements OnInit {
             .selectAll()
             .pipe(take(1))
             .subscribe((entries) => {
-                for (let entry of entries) {
-                    if (!this.entries.find((localEntry) =>localEntry.recipient === entry.recipientOrPayer)
-                        && entry.category === Category.OTHER) {
-                        this.entries = [...this.entries, {
-                            category: Category.OTHER,
-                            recipient: entry.recipientOrPayer
-                        }];
+                for (const entry of entries) {
+                    if (
+                        !this.entries.find(
+                            (localEntry) =>
+                                localEntry.recipient === entry.recipientOrPayer
+                        ) &&
+                        entry.category === Category.OTHER
+                    ) {
+                        this.entries = [
+                            ...this.entries,
+                            {
+                                category: Category.OTHER,
+                                recipient: entry.recipientOrPayer,
+                            },
+                        ];
                         this.entryChanged = true;
                     }
                 }

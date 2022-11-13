@@ -8,5 +8,4 @@ export class SimpleDate {
         this.month = month;
         this.year = year;
     }
-
 }

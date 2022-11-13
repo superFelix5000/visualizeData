@@ -14,12 +14,12 @@ import { BankDataService } from 'src/app/state/bank.data.service';
 })
 export class VisualizationComponent implements OnInit {
     years = YEARS;
-    
+
     // TODO: not used atm
     selectedYear$: Observable<number>;
 
-    yearTotals$: Observable<YearTotals[]> = of([]); 
-    filteredBankDataEntries$: Observable<BankDataEntry[]>;    
+    yearTotals$: Observable<YearTotals[]> = of([]);
+    filteredBankDataEntries$: Observable<BankDataEntry[]>;
 
     constructor(
         private bankDataQuery: BankDataQuery,
@@ -31,7 +31,8 @@ export class VisualizationComponent implements OnInit {
 
         this.yearTotals$ = this.bankDataQuery.selectYearTotals$;
         this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
-        this.filteredBankDataEntries$ = this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonthAndCategory$;
+        this.filteredBankDataEntries$ =
+            this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonthAndCategory$;
     }
 
     onYearSelectionChange(year: number): void {
@@ -55,11 +56,13 @@ export class VisualizationComponent implements OnInit {
     }
 
     onUpload() {
-        this.bankDataQuery.selectAll()
+        this.bankDataQuery
+            .selectAll()
             .pipe(
                 take(1),
-                mergeMap(entries => this.bankDataService.uploadAll(entries)
-            )).subscribe(obj => {
+                mergeMap((entries) => this.bankDataService.uploadAll(entries))
+            )
+            .subscribe((obj) => {
                 console.log('data saved? ' + JSON.stringify(obj));
             });
     }
