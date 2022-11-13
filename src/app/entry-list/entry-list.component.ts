@@ -6,8 +6,6 @@ import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
 import { DataEntrySort } from '../shared/data-entry-sort';
 import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
-import { BankDataQuery } from '../state/bank.data.query';
-import { BankDataService } from '../state/bank.data.service';
 
 @Component({
     selector: 'app-entry-list',
@@ -35,12 +33,7 @@ export class EntryListComponent {
     sort: DataEntrySort;
     sortDirection: DataEntrySortDirection;
     categoryType = Category;
-    searchFieldValue = 'Clear me';
-
-    constructor(
-        private bankDataService: BankDataService,
-        private bankDataQuery: BankDataQuery
-    ) {}
+    searchFieldValue = '';
 
     updatePageData(event: PageEvent): void {
         this.size = event.pageSize;
