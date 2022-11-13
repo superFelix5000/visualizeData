@@ -35,6 +35,7 @@ export class EntryListComponent {
     sort: DataEntrySort;
     sortDirection: DataEntrySortDirection;
     categoryType = Category;
+    searchFieldValue = 'Clear me';
 
     constructor(
         private bankDataService: BankDataService,

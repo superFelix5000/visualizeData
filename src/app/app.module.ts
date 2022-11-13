@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { environment } from '../environments/environment';
@@ -57,6 +59,8 @@ import { YearBarchartComponent } from './charts/year-barchart/year-barchart.comp
         MatPaginatorModule,
         MatTableModule,
         MatSortModule,
+        MatIconModule,
+        MatInputModule,
         environment.production ? [] : AkitaNgDevtools.forRoot(),
     ],
     bootstrap: [AppComponent],
