@@ -65,6 +65,7 @@ import { SearchPipe } from './pipes/search.pipe';
         MatInputModule,
         environment.production ? [] : AkitaNgDevtools.forRoot(),
     ],
+    providers: [SearchPipe],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

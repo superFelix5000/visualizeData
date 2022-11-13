@@ -1,15 +1,19 @@
 <div class="py-10">
     <div class="flex flex-row justify-between">
-        <mat-form-field appearance="fill">
-            <mat-label>Search</mat-label>
-            <input matInput type="text" [(ngModel)]="searchFieldValue" (ngModelChange)="onInputChange($event)">
-            <button *ngIf="searchFieldValue" matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()">
-                <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
-        
+        <div class="flex flex-row justify-start">
+            <mat-form-field appearance="fill">
+                <mat-label>Search</mat-label>
+                <input matInput type="text" [(ngModel)]="searchFieldValue" (ngModelChange)="onInputChange($event)">
+                <button *ngIf="searchFieldValue" matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <div class="flex flex-row items-center px-5 pb-5" *ngIf="searchFieldValue.length !== 0">
+                <p class="font-semibold">total value:   {{filteredEntriesSearchValue$ | async | number}}</p>
+            </div>
+        </div>
         <mat-paginator
-            [length]="(entries | search | async).length"
+            [length]="(filteredEntries$ | async).length"
             [pageSize]="size"
             [pageSizeOptions]="[5, 10, 25, 100]"
             (page)="updatePageData($event)"
@@ -24,7 +28,7 @@
         (matSortChange)="onSortChange($event)"
         mat-table
         [dataSource]="
-            entries | search | async | bankDataSort: sort:sortDirection | slice: start:end
+            filteredEntries$ | async | bankDataSort: sort:sortDirection | slice: start:end
         "
     >
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
