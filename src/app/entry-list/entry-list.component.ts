@@ -37,10 +37,7 @@ export class EntryListComponent {
     categoryType = Category;
     searchFieldValue = '';
 
-    constructor(
-        private bankDataService: BankDataService,
-        private bankdataQuery: BankDataQuery
-    ) {}
+    constructor(private bankDataService: BankDataService) {}
 
     updatePageData(event: PageEvent): void {
         this.size = event.pageSize;
@@ -72,5 +69,10 @@ export class EntryListComponent {
 
     onInputChange(e: string): void {
         this.bankDataService.setSearchQuery(e);
+    }
+
+    onSearchClear(): void {
+        this.searchFieldValue = '';
+        this.bankDataService.setSearchQuery(this.searchFieldValue);
     }
 }
