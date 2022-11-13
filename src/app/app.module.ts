@@ -28,6 +28,7 @@ import { EntryCategoryListComponent } from './entry-category-list/entry-category
 import { RecipientCategorySortPipe } from './pipes/recipient.category.sort.pipe';
 import { StackedComponent } from './charts/stacked/stacked.component';
 import { YearBarchartComponent } from './charts/year-barchart/year-barchart.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { YearBarchartComponent } from './charts/year-barchart/year-barchart.comp
         EntryCategoryListComponent,
         EntryListPageComponent,
         BankDataSortPipe,
+        SearchPipe,
         PrintSimpleDatePipe,
         UploadComponent,
         PieChartComponent,

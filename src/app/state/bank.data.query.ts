@@ -18,6 +18,10 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         super(store);
     }
 
+    selectSearchQuery$: Observable<string> = this.select(
+        (state) => state.searchQuery
+    );
+
     selectCurrentYear$: Observable<number> = this.select(
         (state) => state.selectedYear
     );

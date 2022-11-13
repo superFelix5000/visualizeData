@@ -6,6 +6,8 @@ import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { Category } from 'src/app/shared/categories';
 import { DataEntrySort } from '../shared/data-entry-sort';
 import { DataEntrySortDirection } from '../shared/data-entry-sort-direction';
+import { BankDataQuery } from '../state/bank.data.query';
+import { BankDataService } from '../state/bank.data.service';
 
 @Component({
     selector: 'app-entry-list',
@@ -35,6 +37,11 @@ export class EntryListComponent {
     categoryType = Category;
     searchFieldValue = '';
 
+    constructor(
+        private bankDataService: BankDataService,
+        private bankdataQuery: BankDataQuery
+    ) {}
+
     updatePageData(event: PageEvent): void {
         this.size = event.pageSize;
         this.start = event.pageIndex * event.pageSize;
@@ -58,8 +65,12 @@ export class EntryListComponent {
         this.entryChanged = true;
     }
 
-    onUploadClicked() {
+    onUploadClicked(): void {
         this.onUpload.emit();
         this.entryChanged = false;
+    }
+
+    onInputChange(e: string): void {
+        this.bankDataService.setSearchQuery(e);
     }
 }

@@ -10,6 +10,7 @@ export interface BankDataState extends EntityState<BankDataEntry, string> {
     selectedMonth: number;
     recipientCategories: RecipientCategory[];
     selectedCategory: Category;
+    searchQuery: string;
 }
 
 const initialState: BankDataState = {
@@ -17,6 +18,7 @@ const initialState: BankDataState = {
     recipientCategories: [],
     selectedMonth: null,
     selectedCategory: null,
+    searchQuery: '',
 };
 
 @Injectable({

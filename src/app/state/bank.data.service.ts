@@ -26,6 +26,10 @@ export class BankDataService {
         this.reloadData();
     }
 
+    setSearchQuery(searchQuery: string): void {
+        this.bankDataStore.update(() => ({ searchQuery: searchQuery }));
+    }
+
     setYear(year: number): void {
         this.bankDataStore.update((state) => ({ selectedYear: year }));
     }
