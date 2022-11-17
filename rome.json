@@ -10,7 +10,8 @@
     "enabled": true,
     "indentSize": 4,
     "indentStyle": "space",
-    "ignore": ["*.js"]
+    "ignore": ["*.js"],
+    "lineWidth": 80
   },
   "javascript": {
     "formatter":{
