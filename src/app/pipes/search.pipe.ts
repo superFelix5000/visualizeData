@@ -10,7 +10,7 @@ export class SearchPipe implements PipeTransform {
     transform(values: BankDataEntry[]): Observable<BankDataEntry[]> {
         return this.bankdataQuery.selectSearchQuery$.pipe(
             map((query) => {
-                if (query != null && query.length != 0) {
+                if (query != null && query.length !== 0) {
                     const returnValues = values.filter((value) =>
                         value.recipientOrPayer
                             .toLowerCase()

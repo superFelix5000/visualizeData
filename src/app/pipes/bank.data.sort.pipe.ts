@@ -12,7 +12,7 @@ export class BankDataSortPipe implements PipeTransform {
     ): BankDataEntry[] {
         if (
             sortDirection != null &&
-            sortDirection != DataEntrySortDirection.NONE
+            sortDirection !== DataEntrySortDirection.NONE
         ) {
             switch (sort) {
                 case DataEntrySort.amount:
