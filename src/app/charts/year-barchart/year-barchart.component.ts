@@ -84,7 +84,7 @@ export class YearBarchartComponent implements OnInit {
             { intersect: true },
             true
         );
-        if (items && items.length == 1) {
+        if (items && items.length === 1) {
             this.bankDataService.setMonth(items[0].index + 1);
             this.bankDataService.setCategory(null);
         }

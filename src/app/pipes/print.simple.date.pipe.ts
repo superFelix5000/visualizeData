@@ -5,11 +5,7 @@ import { SimpleDate } from '../shared/simple-date';
 export class PrintSimpleDatePipe implements PipeTransform {
     transform(date: SimpleDate): string {
         return (
-            date.day.toString() +
-            '.' +
-            date.month.toString() +
-            '.' +
-            date.year.toString()
+            `${date.day.toString()}.${date.month.toString()}.${date.year.toString()}`
         );
     }
 }

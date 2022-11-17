@@ -62,16 +62,16 @@ export class BankDataService {
     }
 
     uploadAll(entries: BankDataEntry[]): Observable<Object> {
-        return this.http.post(this.baseUrl + '/api/v1/saveAll', entries);
+        return this.http.post(`${this.baseUrl}/api/v1/saveAll`, entries);
     }
 
     appendAll(entries: BankDataEntry[]): Observable<Object> {
-        return this.http.post(this.baseUrl + '/api/v1/appendAll', entries);
+        return this.http.post(`${this.baseUrl}/api/v1/appendAll`, entries);
     }
 
     downloadAll(): Observable<BankDataFetchServerData> {
         return this.http.get<BankDataFetchServerData>(
-            this.baseUrl + '/api/v1/fetchAll'
+            `${this.baseUrl}/api/v1/fetchAll`
         );
     }
 
@@ -79,14 +79,14 @@ export class BankDataService {
         entries: RecipientCategory[]
     ): Observable<Object> {
         return this.http.post(
-            this.baseUrl + '/api/v1/saveCategoryMap',
+            `${this.baseUrl}/api/v1/saveCategoryMap`,
             entries
         );
     }
 
     downloadRecipientCategories(): Observable<CategoryMapFetchServerData> {
         return this.http.get<CategoryMapFetchServerData>(
-            this.baseUrl + '/api/v1/fetchCategoryMap'
+            `${this.baseUrl}/api/v1/fetchCategoryMap`
         );
     }
 

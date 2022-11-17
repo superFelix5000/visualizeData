@@ -92,7 +92,7 @@ export class PieChartComponent implements OnInit {
             { intersect: true },
             true
         );
-        if (items && items.length == 1) {
+        if (items && items.length === 1) {
             this.bankDataService.setCategory(
                 this.categoryPercentages[items[0].index].category
             );

@@ -97,7 +97,7 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
 
                 return entries.map((entry) => {
                     const category =
-                        entry.category != Category.OTHER
+                        entry.category !== Category.OTHER
                             ? entry.category
                             : rcMap.has(entry.recipientOrPayer)
                             ? rcMap.get(entry.recipientOrPayer)

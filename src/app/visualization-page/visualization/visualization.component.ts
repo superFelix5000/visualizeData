@@ -63,7 +63,7 @@ export class VisualizationComponent implements OnInit {
                 mergeMap((entries) => this.bankDataService.uploadAll(entries))
             )
             .subscribe((obj) => {
-                console.log('data saved? ' + JSON.stringify(obj));
+                console.log(`data saved? ${JSON.stringify(obj)}`);
             });
     }
 }
