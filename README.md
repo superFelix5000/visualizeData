@@ -1,8 +1,7 @@
 # VisualizeData
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.2.
-
 ## TODO:
+- Prozentangabe fuer die Kategorien im Kuchendiagramm
 - create categories
 - how to save category assignment?
 - how to organize your angular apps
@@ -35,6 +34,12 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Running formatter
+npx rome format .
+
+## Running linter
+npx rome check .
 
 ## Further help
 
