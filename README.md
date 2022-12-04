@@ -1,6 +1,17 @@
 # VisualizeData
 
 ## TODO:
+- move to standalone components? --> would that enable to use vite?
+- add visualization for amount of money in bank
+- add percentages in the cake diagram
+- move to nx
+- move deno project also to nx and share code between the two apps?
+- can I use rome as a linter in nx?
+- use nx ionic plugin to create an ionic app
+- put the components and other stuff into libraries so the apps can share those
+--> how to integrate docker into that?
+- Knopf einbauen zum Auwählen von allen Daten gleichzeitig, nicht nur ein Jahr zur Zeit.
+    Damit könnte man dann die Kategorien sich einzeln auch angucken fuer alle Daten und auf allen Daten suchen usw.
 - Prozentangabe fuer die Kategorien im Kuchendiagramm
 - create categories
 - how to save category assignment?
