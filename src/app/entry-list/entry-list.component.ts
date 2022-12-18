@@ -6,8 +6,8 @@ import {
     OnInit,
     Output,
 } from '@angular/core';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
-import { MatLegacySelectChange as MatSelectChange } from '@angular/material/legacy-select';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSelectChange } from '@angular/material/select';
 import { Sort } from '@angular/material/sort';
 import { map, Observable } from 'rxjs';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
