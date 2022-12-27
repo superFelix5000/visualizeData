@@ -22,6 +22,10 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         (state) => state.searchQuery
     );
 
+    selectCurrentBankAccount$: Observable<number> = this.select(
+        (state) => state.selectedBankAccount
+    );
+
     selectCurrentYear$: Observable<number> = this.select(
         (state) => state.selectedYear
     );
@@ -38,20 +42,23 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         (state) => state.recipientCategories
     );
 
+    selectAllFromCurrentBankAccount$: Observable<BankDataEntry[]> = 
+        combineLatest([this.selectAll(), this.selectCurrentBankAccount$]).pipe(
+            map(([entries, bankAccountId]) => entries.filter(entry => entry.bankaccountid === bankAccountId))
+    );
+
     /**
      * @returns the month values for the currently selected year
      */
     selectCurrentMonthValues$: Observable<number[]> = combineLatest([
-        this.selectAll(),
+        this.selectAllFromCurrentBankAccount$,
         this.selectCurrentYear$,
     ]).pipe(map(([entries, year]) => this.getMonthValues(entries, year)));
 
     /**
      * @returns the total balance of each year, separated in plus and minus
      */
-    selectYearTotals$: Observable<YearTotals[]> = this.selectAll().pipe(
-        filter((entries) => entries.length > 0),
-        defaultIfEmpty([]),
+    selectYearTotals$: Observable<YearTotals[]> = this.selectAllFromCurrentBankAccount$.pipe(
         map((entries) =>
             YEARS.map((year) => {
                 const plus = entries
@@ -81,11 +88,13 @@ export class BankDataQuery extends QueryEntity<BankDataState> {
         return returnArray;
     }
 
+   
+
     /**
      * select all entries and fill in their categories from the recipient category map IF available
      */
     selectAllEntriesWithMatchedCategories$: Observable<BankDataEntry[]> =
-        combineLatest([this.selectAll(), this.selectRecipientCategories$]).pipe(
+        combineLatest([this.selectAllFromCurrentBankAccount$, this.selectRecipientCategories$]).pipe(
             map(([entries, recipentCategories]) => {
                 const rcMap: Map<string, Category> = new Map<
                     string,

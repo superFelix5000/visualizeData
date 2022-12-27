@@ -19,7 +19,7 @@ export class EntryListPageComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.entries$ = this.bankDataQuery.selectAll();
+        this.entries$ = this.bankDataQuery.selectAllFromCurrentBankAccount$;
     }
 
     onEntryChanged(entry: Partial<BankDataEntry>) {
@@ -28,7 +28,7 @@ export class EntryListPageComponent implements OnInit {
 
     onUpload() {
         this.bankDataQuery
-            .selectAll()
+            .selectAllFromCurrentBankAccount$
             .pipe(
                 take(1),
                 mergeMap((entries) => this.bankDataService.uploadAll(entries))

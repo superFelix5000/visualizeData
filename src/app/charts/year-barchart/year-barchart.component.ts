@@ -60,13 +60,6 @@ export class YearBarchartComponent implements OnInit {
         );
 
         this.bankDataQuery.selectCurrentMonthValues$
-            .pipe(
-                filter(
-                    (values) =>
-                        values.length > 0 &&
-                        values.find((value) => value > 0) > 0
-                )
-            )
             .subscribe((values) => {
                 this.myChart.data.datasets = [];
                 this.myChart.data.datasets.push({

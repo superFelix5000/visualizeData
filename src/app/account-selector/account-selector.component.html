@@ -1,0 +1,12 @@
+<div class="flex flex-row">
+    <p>Selected Account: </p>
+    <mat-select
+    [value]="selectedBankAccount$ | async"
+    (selectionChange)="onSelectionChange($event)"
+    class="flex-1"
+    >
+        <mat-option [value]="1">1</mat-option>
+        <mat-option [value]="2">2</mat-option>
+    </mat-select>
+</div>
+

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, mergeMap, take } from 'rxjs/operators';
+import { map, mergeMap, take, tap } from 'rxjs/operators';
 import { BankDataEntry } from 'src/app/shared/bank-data-entry';
 import { YEARS } from 'src/app/shared/constants';
 import { YearTotals } from 'src/app/shared/year-totals';
@@ -29,7 +29,7 @@ export class VisualizationComponent implements OnInit {
     ngOnInit(): void {
         this.bankDataService.init();
 
-        this.yearTotals$ = this.bankDataQuery.selectYearTotals$;
+        this.yearTotals$ = this.bankDataQuery.selectYearTotals$.pipe(tap(values => console.log(values.length)));
         this.selectedYear$ = this.bankDataQuery.selectCurrentYear$;
         this.filteredBankDataEntries$ =
             this.bankDataQuery.selectAllEntriesPerSelectedYearAndMonthAndCategory$;

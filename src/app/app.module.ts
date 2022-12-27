@@ -29,6 +29,7 @@ import { RecipientCategorySortPipe } from './pipes/recipient.category.sort.pipe'
 import { StackedComponent } from './charts/stacked/stacked.component';
 import { YearBarchartComponent } from './charts/year-barchart/year-barchart.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { AccountSelectorComponent } from './account-selector/account-selector.component';
 
 @NgModule({
     declarations: [
@@ -46,6 +47,7 @@ import { SearchPipe } from './pipes/search.pipe';
         RecipientCategorySortPipe,
         StackedComponent,
         YearBarchartComponent,
+        AccountSelectorComponent,
     ],
     imports: [
         BrowserModule,
