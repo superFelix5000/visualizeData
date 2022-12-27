@@ -46,7 +46,6 @@ export class PieChartComponent implements OnInit {
 
         this.bankDataQuery.selectAllCategoriesPerSelectedYearAndMonth$
             .pipe(
-                filter((values) => values.length > 0),
                 map((values) =>
                     values.sort((a, b) =>
                         a.category
