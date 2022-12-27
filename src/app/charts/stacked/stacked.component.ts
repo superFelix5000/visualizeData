@@ -62,7 +62,6 @@ export class StackedComponent implements OnInit {
         );
 
         this.bankDataQuery.selectAllEntriesPerSelectedYear$
-            .pipe(filter((entries) => entries.length > 0))
             .subscribe((entries) => {
                 this.myChart.data.datasets = [];
                 for (const key in Category) {
