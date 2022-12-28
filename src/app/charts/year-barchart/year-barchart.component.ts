@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
 import { BankDataService } from 'src/app/state/bank.data.service';
+import { MONTHS } from 'src/app/shared/constants';
 
 @Component({
     selector: 'app-year-barchart',
@@ -12,27 +13,12 @@ export class YearBarchartComponent implements OnInit {
     @ViewChild('canvas', { static: true }) 
     myCanvas: ElementRef<HTMLCanvasElement>;
 
-    private labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
-
     private myChart: Chart;
 
     private config: ChartConfiguration = {
         type: 'bar',
         data: {
-            labels: this.labels,
+            labels: MONTHS,
             datasets: [],
         },
         options: {

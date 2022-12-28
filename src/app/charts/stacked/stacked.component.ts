@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { filter } from 'rxjs';
 import { Category } from 'src/app/shared/categories';
 import { CategoryColorMap } from 'src/app/shared/category-colors';
 import { BankDataQuery } from '../../state/bank.data.query';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { MONTHS } from 'src/app/shared/constants';
 
 @Component({
     selector: 'app-stacked',
@@ -20,23 +20,8 @@ export class StackedComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December',
-        ];
-
         const data = {
-            labels: labels,
+            labels: MONTHS,
             datasets: [],
         };
 

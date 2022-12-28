@@ -1,9 +1,9 @@
 # VisualizeData
 
 ## TODO:
+- breadcrumbs in header - what year/month/category
 - improve design, how to use theme with tailwind css
 - floating header so it's always visible
-- breadcrumbs in header - what year/month/category
 - move to standalone components? --> would that enable to use vite?
 - add visualization for amount of money in bank
 - add percentages in the cake diagram

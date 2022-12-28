@@ -31,6 +31,7 @@ import { YearBarchartComponent } from './charts/year-barchart/year-barchart.comp
 import { SearchPipe } from './pipes/search.pipe';
 import { AccountSelectorComponent } from './account-selector/account-selector.component';
 import { YearsChartComponent } from './charts/years-chart/years-chart.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 @NgModule({
     declarations: [
@@ -50,6 +51,7 @@ import { YearsChartComponent } from './charts/years-chart/years-chart.component'
         YearBarchartComponent,
         AccountSelectorComponent,
         YearsChartComponent,
+        BreadcrumbsComponent,
     ],
     imports: [
         BrowserModule,
