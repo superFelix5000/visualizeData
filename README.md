@@ -1,7 +1,7 @@
 # VisualizeData
 
 ## TODO:
-- breadcrumbs in header - what year/month/category
+- redo header as floating and without hackedyhack css
 - improve design, how to use theme with tailwind css
 - floating header so it's always visible
 - move to standalone components? --> would that enable to use vite?
