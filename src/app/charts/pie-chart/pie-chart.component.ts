@@ -41,6 +41,7 @@ export class PieChartComponent implements OnInit {
                 interaction: {
                     mode: 'index',
                 },
+                responsive: true
             },
         });
 

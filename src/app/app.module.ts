@@ -30,6 +30,7 @@ import { StackedComponent } from './charts/stacked/stacked.component';
 import { YearBarchartComponent } from './charts/year-barchart/year-barchart.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { AccountSelectorComponent } from './account-selector/account-selector.component';
+import { YearsChartComponent } from './charts/years-chart/years-chart.component';
 
 @NgModule({
     declarations: [
@@ -48,6 +49,7 @@ import { AccountSelectorComponent } from './account-selector/account-selector.co
         StackedComponent,
         YearBarchartComponent,
         AccountSelectorComponent,
+        YearsChartComponent,
     ],
     imports: [
         BrowserModule,

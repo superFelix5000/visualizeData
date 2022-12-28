@@ -22,5 +22,5 @@ export const CategoryColorMap: Map<Category, string> = new Map([
     [Category.WELLBEING, '#fffac8'],
     [Category.ELECTRICITY, '#aaffc3'],
     [Category.LOAN, '#dcbeff'],
-    [Category.MAINTENANCECHARGE, '#000000'],
+    [Category.MAINTENANCECHARGE, '#FFFF00'],
 ]);

@@ -1,8 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BankDataQuery } from 'src/app/state/bank.data.query';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
-import { FooterRowOutlet } from '@angular/cdk/table';
-import { filter, map } from 'rxjs';
 import { BankDataService } from 'src/app/state/bank.data.service';
 
 @Component({
@@ -11,7 +9,7 @@ import { BankDataService } from 'src/app/state/bank.data.service';
     styleUrls: ['./year-barchart.component.scss'],
 })
 export class YearBarchartComponent implements OnInit {
-    @ViewChild('canvas', { static: true })
+    @ViewChild('canvas', { static: true }) 
     myCanvas: ElementRef<HTMLCanvasElement>;
 
     private labels = [
@@ -43,6 +41,7 @@ export class YearBarchartComponent implements OnInit {
                     display: false,
                 },
             },
+            responsive: true
         },
     };
 
@@ -63,7 +62,7 @@ export class YearBarchartComponent implements OnInit {
             .subscribe((values) => {
                 this.myChart.data.datasets = [];
                 this.myChart.data.datasets.push({
-                    backgroundColor: 'blue',
+                    backgroundColor: '#3c6591',
                     data: values,
                 });
                 this.myChart.update();
