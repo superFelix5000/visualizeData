@@ -1,30 +1,23 @@
 # VisualizeData
 
 ## TODO:
+- add percentages in the cake diagram
 - redo header as floating and without hackedyhack css
-- improve design, how to use theme with tailwind css
 - floating header so it's always visible
+- make all entries taggable with extra words? (notes field)
 - move to standalone components? --> would that enable to use vite?
 - add visualization for amount of money in bank
-- add percentages in the cake diagram
 - move to nx
 - move deno project also to nx and share code between the two apps?
 - can I use rome as a linter in nx?
 - use nx ionic plugin to create an ionic app
 - put the components and other stuff into libraries so the apps can share those
---> how to integrate docker into that?
+    --> how to integrate docker into that?
 - Knopf einbauen zum Auwählen von allen Daten gleichzeitig, nicht nur ein Jahr zur Zeit.
     Damit könnte man dann die Kategorien sich einzeln auch angucken fuer alle Daten und auf allen Daten suchen usw.
-- Prozentangabe fuer die Kategorien im Kuchendiagramm
-- create categories
-- how to save category assignment?
 - how to organize your angular apps
 - service also handles saving to browser (for categories)
-- make separate components for things
-- make the year balance thingys buttons?
-- save data to browser
 - make categories dynamic on other tab?
-- make all entries taggable with extra words?
 - show categories in cake diagram per year/month/overall
 - use newest typescript?
 - on click() on months show the month-specific data?
