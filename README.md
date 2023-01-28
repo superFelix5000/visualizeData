@@ -3,14 +3,11 @@
 ## TODO:
 - add percentages in the cake diagram
 - redo header as floating and without hackedyhack css
-- floating header so it's always visible
 - make all entries taggable with extra words? (notes field)
 - move to standalone components? --> would that enable to use vite?
 - add visualization for amount of money in bank
-- move to nx
 - move deno project also to nx and share code between the two apps?
 - can I use rome as a linter in nx?
-- use nx ionic plugin to create an ionic app
 - put the components and other stuff into libraries so the apps can share those
     --> how to integrate docker into that?
 - Knopf einbauen zum Auwählen von allen Daten gleichzeitig, nicht nur ein Jahr zur Zeit.
