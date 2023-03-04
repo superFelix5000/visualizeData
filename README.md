@@ -1,6 +1,15 @@
-# VisualizeData
+# Financial Data visualization frontend
+Angular frontend for personal financial data visualization which I have moved [here](https://github.com/superFelix5000/visualizeData_nx).
 
-## TODO:
+## features
+- import csv data from my bank
+- visualize that data using chart.js
+- categorize the data by pre-defined categories
+- different charts for showing yearly/monthly spend, by category
+- tables for showing and editing the entries
+- data is saved through a [deno](https://github.com/superFelix5000/bankDataServer) backend
+
+### TODO:
 - add percentages in the cake diagram
 - redo header as floating and without hackedyhack css
 - make all entries taggable with extra words? (notes field)
@@ -19,24 +28,8 @@
 - use newest typescript?
 - on click() on months show the month-specific data?
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running formatter
-npx rome format .
-
-## Running linter
-npx rome check .
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## usage
+- basic angular usage
+- `npm run start`
+- `npm run lint`
+- `npm run format`
