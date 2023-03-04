@@ -29,6 +29,7 @@ Angular frontend for personal financial data visualization which I have moved [h
 
 ## usage
 - basic angular usage
+- `npm install`
 - `npm run start`
 - `npm run lint`
 - `npm run format`
