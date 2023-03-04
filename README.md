@@ -8,6 +8,7 @@ Angular frontend for personal financial data visualization which I have moved [h
 - different charts for showing yearly/monthly spend, by category
 - tables for showing and editing the entries
 - data is saved through a [deno](https://github.com/superFelix5000/bankDataServer) backend
+- ...
 
 ### TODO:
 - DONE: move deno project also to nx and share code between the two apps?
