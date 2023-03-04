@@ -10,22 +10,20 @@ Angular frontend for personal financial data visualization which I have moved [h
 - data is saved through a [deno](https://github.com/superFelix5000/bankDataServer) backend
 
 ### TODO:
+- DONE: move deno project also to nx and share code between the two apps?
+- DONE: can I use rome as a linter in nx?
 - add percentages in the cake diagram
 - redo header as floating and without hackedyhack css
 - make all entries taggable with extra words? (notes field)
 - move to standalone components? --> would that enable to use vite?
 - add visualization for amount of money in bank
-- move deno project also to nx and share code between the two apps?
-- can I use rome as a linter in nx?
 - put the components and other stuff into libraries so the apps can share those
     --> how to integrate docker into that?
 - Knopf einbauen zum Auwählen von allen Daten gleichzeitig, nicht nur ein Jahr zur Zeit.
     Damit könnte man dann die Kategorien sich einzeln auch angucken fuer alle Daten und auf allen Daten suchen usw.
-- how to organize your angular apps
 - service also handles saving to browser (for categories)
 - make categories dynamic on other tab?
 - show categories in cake diagram per year/month/overall
-- use newest typescript?
 - on click() on months show the month-specific data?
 
 ## usage
